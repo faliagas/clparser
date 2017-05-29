@@ -20,7 +20,7 @@ $ myprog -max_num_iter=32 -temperature=+1.e-2 -where="right boundary"
 $ myprog -use_emulation -extra-precision=no
 ```
 >
->**Clparser** will take care to collect all these values and place them automatically to the appropriate program variables.
+>**Clparser** will take care of collecting all these values and placing them automatically to the appropriate program variables.
 * _Selectors_ or _offsets_ in arrays  
 >Assume in our program we have the following array  
 ```c++
