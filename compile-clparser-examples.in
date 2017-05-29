@@ -1,0 +1,226 @@
+#!/bin/bash
+# It can be run also as sh (faster!)
+
+echo_if_verbose()
+{
+	if [ "$verbose_spec" = 1 ]
+	then
+		echo "$1"
+	fi
+}
+
+display_help()
+{
+  echo "Usage: compile-examples [OPTIONS] [ARG1 ...]"
+  echo "ARG1 is a c++ program without cpp extension (e.g. x compiles x.cpp)."
+  echo "ARG1.cpp supposed in examples subdirectory (use -x to change this)."
+  echo "If no arguments are given, the default set of examples is compiled."
+  echo
+  echo "Available options:"
+  echo "-a, --argp        use argp interface"
+  echo "-f, --no-ltlibs   do not use libtool libs"
+  echo "-g                compile for debugging"
+  echo "--inst-dir=DIR    installation directory is DIR (default $inst_dir)"
+	echo "-l, --use-ltlibs  use libtool libs (default)"
+  echo "--src-dir=DIR     source directory is DIR (default $src_dir)"
+  echo "-v, --verbose     issue informative and diagnostic messages"
+  echo "-x, --no-examples sources are not in examples subdirectory"
+  echo
+  echo "--help, --usage, -h, -?"
+  echo "                  display this message"
+  echo "-V, --version     display version"
+  echo
+  echo "Use 'export myvar=its_value' to define variable myvar"
+  echo "where myvar=inst_dir, src_dir"
+}
+
+examples_fsi="example-11:example-12:example-13:example-14:example-15:example-16:\
+example-21:example-22:example-22a:example-22b:example-22c:\
+example-31:example-32:example-33:\
+example-41:example-41a:example-42"
+examples_argp="example-gnu-1:example-gnu-2:example-gnu-3:example-gnu-3a:example-gnu-3b:example-gnu-4:\
+example-62:example-62a:example-64:example-65:example-65a:\
+example-71:example-72:example-72a:example-72b:\
+example-81:example-82:\
+example-91:example-93"
+cfl="--std=c++11"
+g_spec=0
+verbose_spec=0
+use_ltlibs=1
+use_argp=0
+no_examples=0
+if [ x"$inst_dir" = x ]; then
+	inst_dir="@prefix@"
+fi
+if [ x"$src_dir" = x ]; then
+	src_dir="@abs_srcdir@"
+fi
+lib_spec="clparser"
+
+sources=
+
+for arg in $@
+do
+	case $arg in
+  "--help" | "--usage" | "-h" | "-?")
+			display_help
+    	exit 0
+    	;;
+  "--version" | "-V")
+    	echo 1.0
+    	exit 0
+    	;;
+  "-v" | "--verbose")
+    	echo "using verbose output"
+    	verbose_spec=1
+    	;;
+  *)
+  		;;
+  esac
+done
+
+while [ "$1" != "" ]
+do
+	case $1 in
+  "--help" | "--usage" | "-h" | "-?")
+			display_help
+    	exit 0
+    	;;
+  "--version" | "-V")
+    	echo 1.0
+    	exit 0
+    	;;
+  "-v" | "--verbose")
+#    	echo_if_verbose "using verbose output"
+#    	verbose_spec=1
+    	;;
+  -g)
+    	if [ "$g_spec" = 0 ]; then
+    		echo_if_verbose "compile with debug information"
+    		cfl=$cfl" -g"
+    		g_spec=1
+    	else
+      	echo "ignoring extra -g option..."
+    	fi
+    	;;
+  "-a" | "--argp")
+    	echo_if_verbose "using argp interface"
+    	use_argp=1
+    	;;
+  "-f" | "--no-ltlibs")
+    	echo_if_verbose "using no libtool libraries"
+    	use_ltlibs=0
+    	;;
+  "-l" | "--use-ltlibs")
+    	echo_if_verbose "using libtool libraries"
+    	use_ltlibs=1
+    	;;
+  "-x" | "--no-examples")
+    	echo_if_verbose "sources are not in examples subdirectory"
+    	no_examples=1
+    	;;
+  --inst-dir=*)
+    	inst_dir="${1#--inst-dir=}"
+    	echo_if_verbose "using installation directory $inst_dir"
+    	;;
+  --inst-dir)
+			shift
+			if [ "x$1" = "x" ]; then
+				echo "option '--inst-dir' expects an argument"
+				exit 3
+			fi
+    	inst_dir="$1"
+    	echo_if_verbose "using installation directory $inst_dir"
+    	;;
+  --src-dir=*)
+    	src_dir="${1#--src-dir=}"
+    	echo_if_verbose "using source directory $src_dir"
+    	;;
+  --src-dir)
+			shift
+			if [ "x$1" = "x" ]; then
+				echo "option '--src-dir' expects an argument"
+				exit 2
+			fi
+    	src_dir="$1"
+    	echo_if_verbose "using source directory $src_dir"
+    	;;
+  [\-]*)
+    	echo "Unrecognized option: $1"
+    	echo "Try 'compile-examples --help' for more information."
+    	exit 2
+    	;;
+  *[=]*)
+    	echo "Unknown assignment: $1"
+    	echo "Use 'export myvar=its_value' to define variable myvar"
+    	exit 2
+    	;;
+  *)
+			if [ "x$sources" = "x" ]; then
+				sources=$1
+			else
+    		sources=$sources:$1
+			fi
+    	;;
+	esac
+	shift
+done
+
+# Sources
+if [ "x$sources" = "x" ]; then
+	if [ "$use_argp" = 1 ]; then
+		echo_if_verbose "compiling argp examples..."
+		sources=$examples_argp
+	else
+		echo_if_verbose "compiling FSI examples..."
+		sources=$examples_fsi
+	fi
+fi
+
+# Select library
+if [ "$use_argp" = 1 ]; then
+	lib_spec=$lib_spec"-argp"
+	cfl=$cfl" -DARGP_INTERFACE"
+fi
+if [ "$use_ltlibs" = 0 ]; then
+	lib_spec=$lib_spec"-cb"
+fi
+if [ "$g_spec" = 1 ]; then
+	lib_spec=$lib_spec"-debug"
+fi
+
+# Source prefix
+examples_dir=""
+if [ "$no_examples" = 0 ]; then
+	examples_dir="$src_dir/examples/"
+fi
+
+#echo "c++ flags: $cfl"
+
+odir=$inst_dir/bin
+ldir=$inst_dir/lib
+# change to installation directory, i.e.
+#incl_dir=$inst_dir/include
+incl_dir=$src_dir/include
+
+# This allows the compilation of sources with spaces
+old_IFS=$IFS
+IFS=:
+
+for source in $sources
+do
+  echo $source":"
+  echo_if_verbose "g++ $cfl -o \"$odir/$source\" -I\"$incl_dir\" -L\"$ldir\" -Wl,--rpath=\"$ldir\" \"$examples_dir$source.cpp\" -l$lib_spec"
+  IFS=" "
+  g++ $cfl -o "$odir/$source" -I"$incl_dir" -L"$ldir" -Wl,--rpath="$ldir" "$examples_dir$source.cpp" -l$lib_spec
+  IFS=:
+  if [ ! "$?" -eq 0 ]
+  then
+  	echo Compilation failed!
+    exit 3
+  fi
+done
+
+IFS=$old_IFS
+
+echo Finished!
