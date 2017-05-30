@@ -3,7 +3,7 @@
 The _Command Line Parser_ (**clparser**) makes it easy to write user-friendly command-line interfaces for applications and scientific or computational programs. It comes in two flavors: **argp** and **free-style**. The **argp** interface is a front-end to **argp**.
 
 ### Description ###
-The program declares an instance of the C++ class **CmdLineArgs** and defines the required arguments. Then a call to the method **CmdLineArgs::parse**() parses the user supplied arguments, which are passed as arguments to the **main**() function, placing user supplied values to program variables and executing any specified actions. **CmdLineArgs** automatically generates help and usage messages, and issues warnings and errors when necessary.
+The program declares an instance of the C++ class **CmdLineArgs** and defines the required arguments. Then a call to the method **CmdLineArgs::parse**() parses the user supplied arguments, which are passed as arguments to the **main**() function, placing user supplied values to program variables and executing _actions_. **CmdLineArgs** automatically generates help and usage messages, and issues warnings and errors when necessary.
 
 **Clparser** is an alternative to [getopt](https://www.gnu.org/software/libc/manual/html_node/Getopt.html) and [argp](https://www.gnu.org/software/libc/manual/html_node/Argp.html), but much easier, faster and more powerful.
 
@@ -42,7 +42,7 @@ $ myprog -peach
 **_CmdLineArgs_** was designed with minimal learning requirements in mind. A [tutorial](https://github.com/faliagas/clparser/wiki "clparser tutorial") is available, and many examples are in the _examples_ folder.
 
 ### Compilation - Installation ###
-In the `source` directory (the directory where the `clparser` was decompressed; it contains the `configure` script) issue
+In the `source` directory (the directory where `clparser` was decompressed or downloaded; it contains the `configure` script) issue
 ```bash
 ./configure
 ```
