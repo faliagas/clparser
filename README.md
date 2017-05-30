@@ -29,7 +29,7 @@ Assume in our program we have the following array
 const char *fruits[] = {"orange", "apple", "grape", "peach", "melon"};  
 int ofs = 1; // default selection is apple
 ```
-and we'd like to have the user select an object. This is specified on the command line as follows:
+and we'd like to let the user select an object. This is specified on the command line as follows:
 ```bash
 $ myprog -peach
 ```
