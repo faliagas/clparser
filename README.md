@@ -11,6 +11,7 @@ The program declares an instance of the C++ class **CmdLineArgs** and defines th
 The user can specify:
 
 * _Integer_, _floating-point_, _string_ and _boolean_ data.   
+
 For example, assuming our program is `myprog`, the command line
 ```bash
 $ myprog -max_num_iter=32 -temperature=+1.e-2 -where="right boundary"
@@ -20,7 +21,9 @@ specifies an integer (`-max_num_iter`), a floating point number (`-temperature`)
 $ myprog -use_emulation -extra-precision=no
 ```
 **Clparser** will take care of collecting all these values and placing them automatically to the associated program variables.
+
 * _Selectors_ or _offsets_ in arrays  
+
 Assume in our program we have the following array  
 ```c++
 const char *fruits[] = {"orange", "apple", "grape", "peach", "melon"};  
