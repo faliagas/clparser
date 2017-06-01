@@ -64,3 +64,6 @@ Replace `make install-strip` by `make install` if you want to keep debugging inf
 
 ## Usage ##
 Compile your program and link it to the appropriate **clparser** library. For more details look at the [tutorial](https://github.com/faliagas/clparser/wiki "clparser tutorial").
+
+## Contact Information ##
+For bug reports, feature requests, improvement suggestions and comments, please contact the author at apostol.faliagas@gmail.com.
