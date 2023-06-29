@@ -1,12 +1,12 @@
 # configure.ac - autoconf script.
-# Copyright (C) 2017 apostol <apostol.faliagas@gmail.com>
+# Copyright (C) 2017-23 apostol <apostol.faliagas@gmail.com>
 # Process this file with autoconf to produce a configure script.
 # Refs.
 # [1] www.gnu.org/savannah-checkouts/gnu/automake/manual/html_node/Local-Macros.html
 # [2] www.gnu.org/software/autoconf-archive/ax_cxx_compile_stdcxx.html
-# Rev. Thu 25 May 2017 11:59:17 AM EEST
+# Rev. Tue 27 Jun 2023 12:15:50 PM EEST
 
-AC_INIT([clparser], [1.0.0], [apostol.faliagas@gmail.com], [clparser])
+AC_INIT([clparser], [1.0.1], [apostol.faliagas@gmail.com], [clparser])
 AM_INIT_AUTOMAKE([subdir-objects -Wall])
 AC_CONFIG_MACRO_DIRS([m4])
 AC_PROG_CXX
