@@ -1,6 +1,6 @@
 ## Makefile.am - automake script.
-## Copyright (C) 2017 apostol <apostol.faliagas@gmail.com>
-## Rev. Thu 25 May 2017 11:56:05 AM EEST
+## Copyright (C) 2017-23 apostol <apostol.faliagas@gmail.com>
+## Rev. Tue 27 Jun 2023 12:14:58 PM EEST
 
 AM_CXXFLAGS = -std=c++11
 AM_CPPFLAGS = -I$(srcdir)/include
@@ -10,15 +10,13 @@ ARGPCPPFLAGS = -I$(srcdir)/include -DARGP_INTERFACE
 lib_LTLIBRARIES = libclparser.la libclparser-argp.la
 
 libclparser_argp_la_SOURCES = src/clparser_argp.cpp \
-  include/clparser.hpp \
-  include/clparser.h
+  include/clparser.hpp
 libclparser_argp_la_CPPFLAGS = $(ARGPCPPFLAGS)
-libclparser_argp_la_LDFLAGS = -version-info 1:0:0
+libclparser_argp_la_LDFLAGS = -version-info 1:0:1
 
 libclparser_la_SOURCES = src/clparser.cpp \
-  include/clparser.hpp \
-  include/clparser.h
-libclparser_la_LDFLAGS = -version-info 1:0:0
+  include/clparser.hpp
+libclparser_la_LDFLAGS = -version-info 1:0:1
 
 # Compilation of examples
 if COMPILE_EXAMPLES
@@ -134,7 +132,7 @@ bin_SCRIPTS = compile-clparser-examples
 CLEANFILES = $(bin_SCRIPTS)
 
 # Distribute headers
-include_HEADERS = include/clparser.h include/clparser.hpp
+include_HEADERS = include/clparser.hpp
 
 # Distribute documentation
 dist_doc_DATA = README README.md COPYING AUTHORS ChangeLog INSTALL NEWS \
