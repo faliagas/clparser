@@ -630,7 +630,7 @@ void CmdLineArgs::display_usage(unsigned flags) const {
   parser_data.options     = _argpOptions.data();
   parser_data.parser      = f_options_parser;
   parser_data.doc         = _doc.empty() ? _doc.c_str() : 0;
-  parser_data.args_doc    = _args_doc.empty() ? _args_doc.c_str() : 0;
+  parser_data.args_doc    = _args_doc.empty() ? 0 : _args_doc.c_str();
   parser_data.children    = 0;
   parser_data.help_filter = 0;
   parser_data.argp_domain = 0;
