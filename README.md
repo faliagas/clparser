@@ -3,9 +3,9 @@
 The _Command Line Parser_ (**clparser**) makes it easy to write user-friendly command-line interfaces for applications and scientific or computational programs. It comes in two flavors: **argp** and **free-style**. The **argp** interface is a front-end to **argp**.
 
 ## Description ##
-The program declares an instance of the C++ class **CmdLineArgs** and defines the required arguments. Then a call to the method **CmdLineArgs::parse**() parses the user supplied arguments, which are passed as arguments to the **main**() function, placing user supplied values to program variables and executing _actions_. **CmdLineArgs** automatically generates help and usage messages, and issues warnings and errors when necessary.
+The program declares an instance of the C++ class **CmdLineArgs** and defines the required arguments. Then a call to the method **CmdLineArgs::parse**() parses the user supplied arguments, which are passed as arguments to the **main**() function, placing user supplied values to program variables and/or executing user defined _actions_. **CmdLineArgs** automatically generates help and usage messages, and issues warnings and errors when necessary.
 
-**Clparser** is an alternative to [getopt](https://www.gnu.org/software/libc/manual/html_node/Getopt.html) and [argp](https://www.gnu.org/software/libc/manual/html_node/Argp.html), but much easier, faster and more powerful.
+**Clparser** is an alternative to [getopt](https://www.gnu.org/software/libc/manual/html_node/Getopt.html) and [argp](https://www.gnu.org/software/libc/manual/html_node/Argp.html), but it is much easier to use and makes for faster and more efficient development.
 
 ## Features ##
 The user can specify:
@@ -60,10 +60,12 @@ After the configuration step run
 $ make
 $ make install-strip
 ```
-Replace `make install-strip` by `make install` if you want to keep debugging information.
+Replace `make install-strip` with `make install` if you want to keep debugging information.
 
 ## Usage ##
-Compile your program and link it to the appropriate **clparser** library. For more details look at the [tutorial](https://github.com/faliagas/clparser/wiki "clparser tutorial").
+Compile your program and link it to the appropriate **clparser** library. For more details, look at the [tutorial](https://github.com/faliagas/clparser/wiki "clparser tutorial").
+
+As another option, you can copy the files `clparser.hpp` and `clparser.cpp` (or `clparser_argp.cpp`) to the appropriate subdirectories of your project and incorporate them in your `Makefile`. Don't forget to define `-DARGP_INTERFACE` if you compile for the **argp** interface.
 
 ## Contact Information ##
 For bug reports, feature requests, improvement suggestions and comments, please contact the author at apostol.faliagas@gmail.com.
