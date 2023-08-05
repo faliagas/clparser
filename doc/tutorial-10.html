@@ -1,0 +1,72 @@
+<!doctype HTML>
+<html>
+<head><meta charset="utf-8">
+  <title>tutorial-8</title>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js">
+  </script>
+  <script>hljs.highlightAll();</script>
+  <style type='text/css'>
+  html{font-size:62.5%}body{font-family:Helvetica,Arial,sans-serif;font-size:150%;line-height:1.3;color:#f6e6cc;width:55%;margin:auto;background:#27221a;position:relative;padding:0 30px}dl,ol,p,pre,table,ul{margin-bottom:1em}ul{margin-left:20px}a{text-decoration:none;cursor:pointer;color:#ba832c;font-weight:700}a:focus{outline:dotted 1px}a:focus,a:hover{color:#d3a459;text-decoration:none}a *,button *{cursor:pointer}hr{display:none}small{font-size:90%}button,input,option,select,textarea{font-family:Arial,"Lucida Grande","Lucida Sans Unicode",Arial,Verdana,sans-serif;font-size:100%}button,input[type=submit],label,option,select{cursor:pointer}.group:after{content:".";display:block;height:0;clear:both;visibility:hidden}* html .group{height:1%}.group{display:block}sup{font-size:80%;line-height:1;vertical-align:super}button::-moz-focus-inner{border:0;padding:1px}span.amp{font-family:Baskerville,"Goudy Old Style",Palatino,"Book Antiqua",serif;font-weight:400;font-style:italic;font-size:1.2em;line-height:.8}h1,h2,h3,h4,h5,h6{line-height:1.1;font-family:Baskerville,"Goudy Old Style",Palatino,"Book Antiqua",serif}h2{font-size:22pt}h3{font-size:20pt}h4{font-size:18pt}h5{font-size:16pt}h6{font-size:14pt}::selection{background:#745626}::-moz-selection{background:#745626}h1{font-size:420%;margin:0 0 .1em;font-family:Baskerville,"Goudy Old Style",Palatino,"Book Antiqua",serif}h1 a,h1 a:hover{color:#d7af72;font-weight:400;text-decoration:none}pre{background:rgba(0,0,0,.3);color:#fff;padding:0px 0px;border-radius:.4em;-moz-border-radius:.4em;-webkit-border-radius:.4em;overflow-x:hidden}pre code{font-size:10pt}.thumb{float:left;margin:10px}table{border-collapse:collapse}td,th{border:1px solid #f6e6cc;padding:.5rem;text-align:left}
+
+  </style>
+</head>
+<body>
+<p>[ <a href="tutorial-9.html" title="Advanced Help (Argp)">Prev &lt;</a> ] [ <a href="tutorial.html" title="Table of Contents">Up</a> ]</p>
+
+<h3>Lesson 10: A More Challenging Example</h3>
+
+<p>In this lesson, we demonstrate how to use the <strong>argp</strong> interface to treat a task often encountered in real-world programming situations. More precisely, we have a program that handles a number of options and a source that expects its own set of arguments. The source&rsquo;s arguments can be several options, possibly the same as those of the program, and some sources. The source and its arguments are optional. The code of this example is in <code>example-gnu-5.cpp</code>.</p>
+
+<pre><code class="c++">int i = -1;
+string text;
+string sourceFile;
+vector&lt;string&gt; extraArgs;
+
+try {
+  CmdLineArgs cl(argc, argv);
+  cl.set_args_doc("[SOURCE [its_options]]");
+  cl.set_doc("A not so trivial example for argp");
+  cl.option("iopt", "integer option", &amp;i, 'i');
+  cl.option("text", "text option", &amp;text, 't');
+  cl.set_on_arg([&amp;extraArgs](argp_state* state, char* arg, int* rc) -&gt; bool {
+    if (state-&gt;arg_num != 0)
+      throw string{"internal error, unexpected source argument"};
+    for (size_t i = state-&gt;next; i &lt; state-&gt;argc; ++i)
+      extraArgs.emplace_back(string{state-&gt;argv[i]});
+    state-&gt;next = state-&gt;argc;
+    *rc = 0;
+    return /* handled? */ false; // it passes control to default handler
+  });
+  cl.parse_cmd_line(ARGP_IN_ORDER);
+  if (!cl.sources().empty())
+    sourceFile = cl.sources().front();
+}
+catch (const string&amp; error_msg) {
+  cout &lt;&lt; "error: " &lt;&lt; error_msg &lt;&lt; endl;
+  return 1;
+}
+
+if (i != -1)
+  cout &lt;&lt; "i: " &lt;&lt; i &lt;&lt; endl;
+if (!text.empty())
+  cout &lt;&lt; "text: " &lt;&lt; text &lt;&lt; endl;
+if (!sourceFile.empty())
+  cout &lt;&lt; "source file: " &lt;&lt; sourceFile &lt;&lt; endl;
+if (!extraArgs.empty()) {
+  cout &lt;&lt; "extra args: ";
+  for (const auto&amp; item : extraArgs)
+    cout &lt;&lt; item &lt;&lt; " ";
+  cout &lt;&lt; endl;
+}
+</code></pre>
+
+<p>The first noteworthy difference is the statement <code>cl.parse_cmd_line(ARGP_IN_ORDER)</code> instead of the familiar <code>cl.parse()</code>. When <strong>argp</strong> parses the command line, it usually reorders the program&rsquo;s arguments. Since our task requires that arguments be parsed in order, the flag <code>ARGP_IN_ORDER</code> must be used. The <code>parse</code> method maps to <code>parse_cmd_line(0)</code>.</p>
+
+<p>To collect the arguments that follow a source (note that in the GNU terminology, the sources are called <em>arguments</em>) we must handle the <code>arg</code> (<code>ARGP_KEY_ARG</code>) event, which occurs when the parser comes across a source. This is done by using the <code>set_on_arg</code> method to specify a lambda which takes as arguments a pointer to an <a href="https://www.gnu.org/software/libc/manual/html_node/Argp-Parsing-State.html" title="Argp Parsing State">argp_state structure</a>, the argument, and a pointer to an integer, the handler&rsquo;s return code. The <code>next</code> member of that structure is the index of the argument next to the current one.</p>
+
+<p>After having finished collecting the source&rsquo;s arguments, we set <code>next</code> to point at the end of the argument list to indicate to the parser that there are no more arguments. Finally, we return <code>false</code> to tell the parser to invoke the default handler immediately after the lambda has returned. Recall that the default handler&rsquo;s action is to store the source&rsquo;s name. An alternative option is to store the source by using the <code>arg</code> field of the <code>argp_state</code> structure and return <code>true</code> to skip the default handling.</p>
+
+<p>[ <a href="tutorial-9.html" title="Advanced Help (Argp)">Prev &lt;</a> ] [ <a href="tutorial.html" title="Table of Contents">Up</a> ]</p>
+</body>
+</html>

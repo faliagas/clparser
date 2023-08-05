@@ -29,8 +29,7 @@
 
 #include "clparser.hpp"
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
   CmdLineArgs cl(argc, argv);
   cl.parse();
   return 0;

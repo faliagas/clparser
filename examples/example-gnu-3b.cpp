@@ -27,48 +27,34 @@
 
 using std::cout; using std::endl; using std::string; using std::vector;
 
-class MyArgpHandler : public ArgpHandler
-{
-  public:
-  MyArgpHandler() {}
-  // ARGP_KEY_ARG handler
-  virtual bool on_arg(argp_state *state, char *arg, int *rc)
-  {
-    if (state->arg_num >= 2) // Too many arguments
-    {
-      cout << arg << " is an extra source." << endl;
-      argp_usage(state);
-    }
-    *rc = 0;
-    return /* pass control to default handler */ false;
-  }
-  // ARGP_KEY_END handler
-  virtual bool on_end(argp_state *state, char *arg, int *rc)
-  {
-    if (state->arg_num < 2) // Not enough arguments
-    {
-      cout << "too few arguments" << endl;
-      argp_usage(state);
-    }
-    *rc = 0;
-    return /* ignored */ false;
-  }
-};
-
 const char *argp_program_version = "argp-ex3 1.0";
 const char *argp_program_bug_address = "<bug-gnu-utils@gnu.org>";
 
-int main (int argc, char **argv)
-{
+int main (int argc, char **argv) {
   vector<string> args; // arg1 & arg2
   bool silent = false, verbose = false;
   string output_file("-");
 
-  try
-  {
+  try {
     CmdLineArgs cl(argc, argv);
-    MyArgpHandler argp_handler;
-    cl.set_argp_handler(&argp_handler);
+    // ARGP_KEY_ARG handler
+    cl.set_on_arg([](argp_state *state, char *arg, int *rc) -> bool {
+      if (state->arg_num >= 2) { // Too many arguments
+        cout << arg << " is an extra source." << endl;
+        argp_usage(state);
+      }
+      *rc = 0;
+      return /* pass control to default handler? */ false;
+    });
+    // ARGP_KEY_END handler
+    cl.set_on_end([](argp_state* state, char* arg, int* rc) -> bool {
+      if (state->arg_num < 2) { // Not enough arguments
+        cout << "too few arguments" << endl;
+        argp_usage(state);
+      }
+      *rc = 0;
+      return /* ignored */ false;
+    });
     cl.set_doc("Argp example #3b -- internal argp options: custom handling");
     cl.set_args_doc("ARG1 ARG2");
 //    cl.set_bool_strict();
@@ -80,9 +66,8 @@ int main (int argc, char **argv)
     cl.parse();
     args = cl.sources();
   }
-  catch (string& msg)
-  {
-    printf("error: %s\n", msg.c_str());
+  catch (string& msg) {
+    cout << "error: " << msg << endl;
     return 3;
   }
 

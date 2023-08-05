@@ -7,16 +7,14 @@ using std::endl;
 using std::string;
 using std::vector;
 
-struct Employee
-{
+struct Employee {
   std::string name;
   int         age;
   double      salary;
   bool        married;
 };
 
-static bool get_bool(string& bstr)
-{
+static bool get_bool(string& bstr) {
   bool rv = bstr == "yes" || bstr == "true" || bstr == "on";
   if (rv) return true;
   rv = !(bstr == "no" || bstr == "false" || bstr == "off");
@@ -24,14 +22,12 @@ static bool get_bool(string& bstr)
   return false;
 }
 
-static Employee parse_employee(const string& record)
-{
+static Employee parse_employee(const string& record) {
   Employee employee = {"noname", 0, 0., false};
   std::stringstream ssr(record);
   string field;
   for (int i = 0; std::getline(ssr, field, ','); ++i)
-    switch (i)
-    {
+    switch (i) {
       case 0: employee.name = field; break;
       case 1: employee.age = std::stoi(field); break;
       case 2: employee.salary = std::stod(field); break;
@@ -41,11 +37,9 @@ static Employee parse_employee(const string& record)
   return employee;
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   vector<Employee> db;
-  try
-  {
+  try {
     CmdLineArgs cl(argc, argv);
     cl.set_doc("example-72a -- add employee records to database.\n"
                "Employee records are supplied as name,age,salary,married"
@@ -54,8 +48,7 @@ int main(int argc, char *argv[])
       [&db](const char *arg) {
         std::stringstream ss(arg);
         string record;
-        while (std::getline(ss, record, ';'))
-        {
+        while (std::getline(ss, record, ';')) {
           Employee employee = parse_employee(record);
           db.push_back(employee);
         }
@@ -63,13 +56,11 @@ int main(int argc, char *argv[])
       });
     cl.parse();
   }
-  catch (std::string& error_msg)
-  {
+  catch (std::string& error_msg) {
     cout << "error: " << error_msg << endl;
     return 1;
   }
-  catch (std::invalid_argument& a)
-  {
+  catch (std::invalid_argument& a) {
     cout << "error: " << "An invalid argument was supplied" << endl;
     return 1;
   }

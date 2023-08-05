@@ -5,19 +5,16 @@ using std::cout;
 using std::endl;
 using std::string;
 
-struct Employee
-{
+struct Employee {
   string name;
   int    age;
   double salary;
 };
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   Employee employee = {"noname", 0, 0.};
 
-  try
-  {
+  try {
     CmdLineArgs cl(argc, argv);
     cl.option("-name=", "employee name", &employee.name);
     cl.option("-age=", "employee age", &employee.age);
@@ -25,8 +22,7 @@ int main(int argc, char *argv[])
     cl.parse();
     cl.display_messages();
   }
-  catch (string& error_msg)
-  {
+  catch (string& error_msg) {
     cout << "error: " << error_msg << endl;
     return 1;
   }

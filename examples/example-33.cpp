@@ -4,12 +4,10 @@
 using std::cout; using std::endl;
 using std::string; using std::vector;
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   bool opt = false;
   bool displaySpecs = false;
-  try
-  {
+  try {
     CmdLineArgs cl(argc, argv);
 //    cl.set_conflict_fatal();
     cl.option_help("--help", "display help");
@@ -21,14 +19,12 @@ int main(int argc, char *argv[])
     cl.option("-display-specs", "display specs", &displaySpecs);
     cl.parse();
     cl.display_messages();
-    if (displaySpecs)
-    {
+    if (displaySpecs) {
       cout << endl << "Command line specifications:" << endl;
       cl.display_specs();
     }
   }
-  catch (string& error_msg)
-  {
+  catch (string& error_msg) {
     cout << "error: " << error_msg << endl;
     return 1;
   }

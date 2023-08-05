@@ -2,16 +2,18 @@
 
 ### Lesson 8: Selections and Aliases
 
-In this lesson you will learn how to use certain utilities offered by **clparser** to make your code simpler and more efficient. Specifically, you will learn how to
+In this lesson, you will discover how to utilize specific tools provided by **clparser** to simplify and optimize your code. You will gain knowledge on how to:
 
-- efficiently program options for indexes into vectors and arrays (selections), and
+- Program selections for indexes into vectors and arrays efficiently
 
-- declare aliases, i.e. different options producing the same effect.
+- Declare aliases, which are different options that produce the same effect
 
-Recall that mutually exclusive options are not available in the **argp** interface. Due to the close similarity of this Lesson with 3, we present only the differences in the codes.
+- Override default Argp handlers
 
+It's important to note that mutually exclusive options are not available in the **argp** interface. As this lesson is closely related to Lesson 3, we will only focus on the differences in the code.
 
 #### 8.1 Selections
+
 Read Lesson 3.1 if you have not done it already.
 
 Let's see example-81 which is the counterpart of example-31:
@@ -19,8 +21,7 @@ Let's see example-81 which is the counterpart of example-31:
 ```c++
 vector<string> fruits = {"apple", "orange", "peach", "melon"};
 int selection = -1;
-try
-{
+try {
   CmdLineArgs cl(argc, argv);
   cl.set_doc("example-81 -- selections.");
   cl.set_args_doc("--[apple|orange|peach|melon]");
@@ -32,8 +33,7 @@ try
   if (selection == -1)
     throw string("One of --apple --orange --peach --melon must be selected");
 }
-catch (string& error_msg)
-{
+catch (string& error_msg) {
   cout << "error: " << error_msg << endl;
   return 1;
 }
@@ -46,7 +46,7 @@ If we run the program with the options `example-81 --orange` we obtain:
 $ Selected fruit: orange
 ```
 
-As it is always the case with **argp**, and contrary to FSI, the user can specify more than once the options `--apple`, `--orange`, `--peach`, `--melon`. Of course, the last option will be in effect.
+As is always the case with **argp**, and contrary to FSI, the user can specify more than once the options `--apple`, `--orange`, `--peach`, `--melon`. Of course, the last option will be in effect.
 
 Finally, let us take a look at the output of `example-81 --help`:
 
@@ -63,19 +63,18 @@ example-81 -- selections.
 ```
 
 #### 8.2 Aliases
+
 It is often desirable to use a command-line argument with a different option name. To declare different options producing the same effect we use **aliases**. To declare an option along with a number of aliases, declare the option in the usual fashion, and then, immediately following this declaration, place a call to the method **CmdLineArgs::alias()** for each equivalent option. Look at the following example (`example-82.cpp`):
 
 ```c++
 bool opt = false;
-try
-{
+try {
   CmdLineArgs cl(argc, argv);
   cl.option("option", "enable feature 'option'", &opt);
   cl.alias ("enable-option");
   cl.parse();
 }
-catch (std::string& error_msg)
-{
+catch (std::string& error_msg) {
   cout << "error: " << error_msg << endl;
   return 1;
 }
@@ -98,9 +97,10 @@ for any corresponding short options.
 ```
 
 #### 8.3 More GNU argp examples
-Carrying on with our presentation of official **argp** examples, in the [third official argp example](https://www.gnu.org/software/libc/manual/html_node/Argp-Example-3.html#Argp-Example-3) we have, in addition to the second example, two options `verbose` and `quiet` turning on certain features, a third option `silent` having the same effect as `quiet`, and finally an option `output` with a string argument. Beside these options, the program expects exactly two arguments (sources). The original source of this example is in [Listing 1](#Listing_1) and its **clparser** version in [Listing 2](#Listing_2).
 
-We slightly modify the code to take advantage of **clparser**'s added features. In the first place, `verbose`, `quiet`, and `silent` need not be integers. They turn on some feature, which by default is off; so they'd better be booleans. Further, we make `output_file` to a `string` and `args` to a `vector<string>`. It is recommended that sources be declared as string vectors. With these modifications the code inside `main()` looks like this:
+Continuing with our presentation of official **argp** examples, this [third example](https://www.gnu.org/software/libc/manual/html_node/Argp-Example-3.html#Argp-Example-3) includes two options in addition to those in the second example: `verbose` and `quiet`, which turn on certain features; and `silent`, which has the same effect as `quiet`. Additionally, there is an option `output` that requires a string argument. The program expects exactly two arguments (sources). The original source code for this example is in [Listing 1](5a.-PART-II.-The-Argp-Interface#Listing_1), and its **Clparser** version is in [Listing 2](5a.-PART-II.-The-Argp-Interface#Listing_2).
+
+We made some modifications to the code to take advantage of **clparser**'s added features. Firstly, `verbose`, `quiet`, and `silent` don't need to be integers. They turn on a feature that is off by default, so they should be booleans instead. Secondly, we changed `output_file` to a `string` and `args` to a `vector<string>`. It's recommended that sources be declared as string vectors. With these modifications, the code inside `main()` looks like this:
 
 ```c++
 vector<string> args; // arg1 & arg2
@@ -108,8 +108,7 @@ bool silent = false, verbose = false;
 string output_file("-");
 
 CmdLineArgs cl(argc, argv);
-try
-{
+try {
   cl.set_doc("Argp example #3 "
       "-- a program with options and arguments using argp");
   cl.set_args_doc("ARG1 ARG2");
@@ -119,16 +118,14 @@ try
   cl.option("output",  "Output to $FILE$ instead of standard output",
       &output_file, 'o');
   cl.parse();
-  if (cl.sources().size() != 2)
-  {
+  if (cl.sources().size() != 2) {
     cl.display_usage();
     return 3;
   }
   args = cl.sources();
 }
-catch (string& msg)
-{
-  printf("error: %s\n", msg.c_str());
+catch (const string& msg) {
+  cout "error: " << msg << endl;
   return 3;
 }
 cout << "ARG1 = " << args[0] << endl
@@ -138,7 +135,7 @@ cout << "ARG1 = " << args[0] << endl
      << "SILENT = "  << (silent ? "yes" : "no") << endl;
 ```
 
-The output of `example-gnu-3a --output=my-file --quiet=yes mysrc1 mysrc2` is
+The output of `example-gnu-3a --output=my-file --quiet=yes mysrc1 mysrc2` is:
 
 ```
 $ ARG1 = mysrc1
@@ -148,7 +145,7 @@ $ VERBOSE = no
 $ SILENT = yes
 ```
 
-Exactly the same output is obtained by `example-gnu-3a --output my-file --quiet=yes mysrc1 mysrc2`. The command line `example-gnu-3a --output=my-file --quiet yes mysrc1 mysrc2` gives, however:
+You get the same output by using the command `example-gnu-3a --output my-file --quiet=true mysrc1 mysrc2`. However, if you use the command `example-gnu-3a --output=my-file --quiet yes mysrc1 mysrc2`, the output will be different.
 
 ```
 $ Usage: example-gnu-3a [OPTION...]
@@ -192,49 +189,32 @@ Argp example #3 -- a program with options and arguments using argp
   -V, --version              Print program version
 ```
 
-It is possible to check the number of supplied sources while the parser is picking them up. To apply this method we have to override the default handling of certain internal options used by **argp**. Sources are picked up when the special option `ARGP_KEY_ARG` is handled. To override its default action we subclass `ArgpHandler`:
-
-```c++
-class MyArgpHandler : public ArgpHandler
-{
-  public:
-  MyArgpHandler() {}
-  // ARGP_KEY_ARG handler
-  virtual bool on_arg(argp_state *state, char *arg, int *rc)
-  {
-    if (state->arg_num >= 2) // Too many arguments
-    {
-      cout << arg << " is an extra source." << endl;
-      argp_usage(state);
-    }
-    *rc = 0;
-    return /* pass control to default handler */ false;
-  }
-  // ARGP_KEY_END handler
-  virtual bool on_end(argp_state *state, char *arg, int *rc)
-  {
-    if (state->arg_num < 2) // Not enough arguments
-    {
-      cout << "too few arguments" << endl;
-      argp_usage(state);
-    }
-    *rc = 0;
-    return /* ignored */ false;
-  }
-};
-```
-
-When `argp_usage()` is called it forces the program to terminate with an error exit code. The `on_end()` handler does about the same job as the `if (cl.sources().size() != 2)` code block. All other handlers stay with their default implementation (which is `return false`). After `MyArgpHandler` has been coded, we can tell our argument parser to use this handler instead of the default by calling `CmdLineArgs::set_argp_handler(ArgpHandler *)`:
+To keep track of the number of sources being picked up by the parser, we can use a method that involves overriding certain internal options used by the **argp** library. The sources are picked up when the `ARGP_KEY_ARG` option is handled. We can redefine the `on_arg` handler for `ARGP_KEY_ARG` to change its default action:
 
 ```c++
   vector<string> args; // arg1 & arg2
   bool silent = false, verbose = false;
   string output_file("-");
-  try
-  {
+  try {
     CmdLineArgs cl(argc, argv);
-    MyArgpHandler argp_handler;
-    cl.set_argp_handler(&argp_handler);
+    // ARGP_KEY_ARG handler
+    cl.set_on_arg([](argp_state *state, char *arg, int *rc) -> bool {
+      if (state->arg_num >= 2) { // Too many arguments
+        cout << arg << " is an extra source." << endl;
+        argp_usage(state);
+      }
+      *rc = 0;
+      return /* pass control to default handler? */ false;
+    });
+    // ARGP_KEY_END handler
+    cl.set_on_end([](argp_state *state, char *arg, int *rc) -> bool {
+      if (state->arg_num < 2) { // Not enough arguments
+        cout << "too few arguments" << endl;
+        argp_usage(state);
+      }
+      *rc = 0;
+      return /* ignored */ false;
+    });
     cl.set_doc("Argp example #3 "
         "-- a program with options and arguments using argp");
     cl.set_args_doc("ARG1 ARG2");
@@ -246,11 +226,12 @@ When `argp_usage()` is called it forces the program to terminate with an error e
     cl.parse();
     args = cl.sources();
   }
-  catch (string& msg)
-  {
-    printf("error: %s\n", msg.c_str());
+  catch (string& msg) {
+    cout << "error: " << msg << endl;
     return 3;
   }
 ```
+
+When `argp_usage()` is called, the program terminates with an error exit code. The `on_end()` handler has a similar function to the `if (cl.sources().size() != 2)` code block. The remaining handlers retain their default implementation.
 
 [ [Prev <](tutorial-7.html "Displaying Information and Executing Commands (Argp)") ] [ [Next >](tutorial-9.html "Advanced Help (Argp)") ] [ [Up](tutorial.html "Table of Contents") ]

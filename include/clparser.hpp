@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*-  */
 /*
  * cmdline.hpp
- * Copyright (C) 2017 Apostol Faliagas <apostol.faliagas@gmail.com>
+ * Copyright (C) 2017-23 Apostol Faliagas <apostol.faliagas@gmail.com>
  *
  * clparser is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -100,7 +100,6 @@ public:
   CmdLineOption& item(int i) {return (*this)[i];}
   int index(const CmdLineOption& r) const;
   int index_by_name(const CmdLineOption& r) const;
-  void add(const CmdLineOption& r) {std::vector<CmdLineOption>::push_back(r);}
 };
 
 #ifdef ARGP_INTERFACE
@@ -108,34 +107,30 @@ public:
 // ArgpHandler -- Interface
 // =============================================================================
 class CmdLineArgs;
+using SpecialKeyParserFunction = std::function<bool(argp_state*, char*, int*)>;
+using ArgpParserFunction = std::function<bool(int, argp_state*, char*, int*)>;
 class ArgpHandler {
-  public:
+public:
   CmdLineArgs *owner;
   ArgpHandler() {}
   // ARGP_KEY_ARG
-  virtual bool on_arg(argp_state *state, char *arg, int *rc)
-  { *rc = 0; return /*not handled*/ false; }
+  SpecialKeyParserFunction on_arg;
   // ARGP_KEY_END
-  virtual bool on_end(argp_state *state, char *arg, int *rc)
-  { *rc = 0; return /*not handled*/ false; }
+  SpecialKeyParserFunction on_end;
   // ARGP_KEY_ARGS
-  virtual bool on_args(argp_state *state, char *arg, int *rc)
-  { *rc = 0; return /*not handled*/ false; }
+  SpecialKeyParserFunction on_args;
   // ARGP_KEY_NO_ARGS
-  virtual bool on_no_args(argp_state *state, char *arg, int *rc)
-  { *rc = 0; return /*not handled*/ false; }
+  SpecialKeyParserFunction on_no_args;
   // ARGP_KEY_INIT
-  virtual bool on_init(argp_state *state, char *arg, int *rc)
-  { *rc = 0; return /*not handled*/ false; }
+  SpecialKeyParserFunction on_init;
   // ARGP_KEY_SUCCESS
-  virtual bool on_success(argp_state *state, char *arg, int *rc)
-  { *rc = 0; return /*not handled*/ false; }
+  SpecialKeyParserFunction on_success;
   // ARGP_KEY_ERROR
-  virtual bool on_error(argp_state *state, char *arg, int *rc)
-  { *rc = 0; return /*not handled*/ false; }
+  SpecialKeyParserFunction on_error;
   // ARGP_KEY_FINI
-  virtual bool on_finished(argp_state *state, char *arg, int *rc)
-  { *rc = 0; return /*not handled*/ false; }
+  SpecialKeyParserFunction on_finished;
+  // User key parser
+  ArgpParserFunction on_key;
 };
 #endif // ARGP_INTERFACE
 
@@ -145,7 +140,7 @@ class ArgpHandler {
 class CmdLineArgs : public CmdLineOptionVector {
 #ifdef ARGP_INTERFACE
 
-  ArgpHandler                *_argpHandler;
+  ArgpHandler                 _argpHandler;
   std::vector<std::string>    _parseMessages;
   std::vector<std::string>    _sources;
   std::vector<argp_option>    _argpOptions;
@@ -187,18 +182,6 @@ public:
 #ifdef ARGP_INTERFACE
 
   CmdLineArgs() :
-      _argpHandler        (0),
-      _curGroup           (0),
-      _argc               (0),
-      _argv               (0),
-      _pgmName            (""),
-      _doc                (""),
-      _args_doc           (""),
-      _initialized        (false),
-      _parsed             (false),
-      _boolStrict         (false) {_check_lib_type(CMDL_LIB_TYPE);}
-  CmdLineArgs(int argc, char *argv[]) :
-      _argpHandler        (0),
       _curGroup           (0),
       _argc               (0),
       _argv               (0),
@@ -208,7 +191,18 @@ public:
       _initialized        (false),
       _parsed             (false),
       _boolStrict         (false)
-  { _check_lib_type(CMDL_LIB_TYPE); init(argc, argv); }
+  { _check_lib_type(CMDL_LIB_TYPE); _argpHandler.owner = this; }
+  CmdLineArgs(int argc, char *argv[]) :
+      _curGroup           (0),
+      _argc               (0),
+      _argv               (0),
+      _pgmName            (""),
+      _doc                (""),
+      _args_doc           (""),
+      _initialized        (false),
+      _parsed             (false),
+      _boolStrict         (false)
+  { _check_lib_type(CMDL_LIB_TYPE); init(argc, argv); _argpHandler.owner = this; }
 
 #else
 
@@ -305,8 +299,6 @@ public:
 
 #ifdef ARGP_INTERFACE
          bool option_uses_no_arg  (int which = -1/*most recent*/);
-         void set_argp_handler    (ArgpHandler *h) { _argpHandler = h;
-                                      if (h != 0) h->owner = this; }
   // Set group documentation
          void begin_group         (const char *group_header = 0);
          void doc_header          (const char *doc);
@@ -314,6 +306,7 @@ public:
   // Set documentation
          void set_doc             (const std::string&);
          void set_args_doc        (const std::string&);
+         void set_footer          (const std::string&);
 
   // Parse cmd line and execute commands
          int  parse_cmd_line      (unsigned flags = 0);
@@ -324,6 +317,18 @@ public:
 
 #ifdef ARGP_INTERFACE
   inline void set_bool_strict     (bool f = true) {_boolStrict = f;}
+  // Configure parser
+  using SKPF = SpecialKeyParserFunction;
+  using SAPF = ArgpParserFunction;
+  inline void set_on_arg          (SKPF f) {_argpHandler.on_arg = f;}
+  inline void set_on_end          (SKPF f) {_argpHandler.on_end = f;}
+  inline void set_on_args         (SKPF f) {_argpHandler.on_args = f;}
+  inline void set_on_no_args      (SKPF f) {_argpHandler.on_no_args = f;}
+  inline void set_on_init         (SKPF f) {_argpHandler.on_init = f;}
+  inline void set_on_success      (SKPF f) {_argpHandler.on_success = f;}
+  inline void set_on_error        (SKPF f) {_argpHandler.on_error = f;}
+  inline void set_on_finished     (SKPF f) {_argpHandler.on_finished = f;}
+  inline void set_on_key          (SAPF f) {_argpHandler.on_key = f;}
 #else
   // Display user specs
          void display_specs       () const;
@@ -344,11 +349,12 @@ public:
   void        display_usage       (unsigned flags = 0) const;
 
 protected:
-         void _set_option_id      (CmdLineOption& cmdlo, int option_id);
+         int  _set_option_id      (CmdLineOption& cmdlo, int option_id);
          bool _check_lib_type     (int lib_type);
 #ifdef ARGP_INTERFACE
+  static error_t _options_parser  (int key, char* arg, argp_state* state);
          int  _build_info_arg     (const std::string& info, unsigned type);
-         bool _check_option       (const char *option, int key);
+         bool _check_option       (const char* option, int key);
 #else // ! ARGP_INTERFACE
          void _display_spec       (int j) const;
 #endif // ARGP_INTERFACE

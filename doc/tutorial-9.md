@@ -1,19 +1,21 @@
-[ [Prev <](tutorial-8.html "Selections and Aliases (Argp)") ] [ [Up](tutorial.html "Table of Contents") ]
+[ [Prev <](tutorial-8.html "Selections and Aliases (Argp)") ] [ [Next >](tutorial-10.html "A Challenging Example") ] [ [Up](tutorial.html "Table of Contents") ]
 
 ### Lesson 9: Advanced Help Topics
 
-**Argp** has many interesting features for advanced help display, and this lesson is devoted to this topic.
+This lesson is dedicated to exploring the advanced help display features of **argp**.
 
 #### 9.1 Help footers
-**Argp** offers the possibility to add a footer to the help text. To add a help footer use the method **CmdLineArgs::set_doc()** and separate the header from the footer with a '`\v`', as in the following example (`example-91.cpp`):
+
+**Argp** allows you to add a footer to the help text. One way to do this is to use the `CmdLineArgs::set_doc()` method and separate the header from the footer with a vertical tab character (`\v`). A second, easier method is to use the CmdLineArgs::set_footer() method as in the following example; refer to example-91.cpp.
 
 ```c++
 int num = 1;
 vector<string> sources;
-try
-{
+try {
   CmdLineArgs cl(argc, argv);
-  cl.set_doc("Clparser argp example 9.1 -- Help footers.\v"
+  cl.set_doc("Clparser argp example 9.1 -- Help footers.);
+  cl.set_args_doc("ARG1 ...");
+  cl.set_footer(
              "Footer text:\n"
              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed "
              "do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
@@ -28,18 +30,15 @@ try
              "accommodare an eam. Reque blandit qui eu, cu vix nonumy "
              "volumus. Legendos intellegam id usu, vide oporteat vix eu, "
              "id illud principes has. Nam tempor utamur gubergren no.");
-  cl.set_args_doc("ARG1 ...");
   cl.option("num", "number of objects", &num, 'n');
   cl.parse();
-  if (cl.sources().size() < 1)
-  {
+  if (cl.sources().size() < 1) {
     cl.display_usage();
     return 3;
   }
   sources = cl.sources();
 }
-catch (string& error_msg)
-{
+catch (const string& error_msg) {
   cout << "error: " << error_msg << endl;
   return 1;
 }
@@ -77,7 +76,8 @@ $ vide oporteat vix eu, id illud principes has. Nam tempor utamur gubergren no.
 ```
 
 #### 9.2 Groups
-As already said, **argp**'s groups have nothing in common with FSI groups. In FSI groups represent sets of mutually exclusive options; in **argp** groups are sets of options which are grouped together under a group header for display, when help is requested.
+
+As already said, the **argp**'s groups are different from the FSI groups. In the FSI, groups represent sets of mutually exclusive options; in **argp** groups are sets of options that are grouped together under a group header for the display of help.
 
 The simplest way to define groups of options is to separate each group with a `doc_header()` method. Let's see it in the 4<sup>th</sup> official **argp example** (`example-gnu-4.cpp`):
 
@@ -87,16 +87,15 @@ string output_file("-");
 vector<string> strings;
 bool silent = false, verbose = false, abort = false;
 int repeat_count = 1;
-try
-{
+try {
   CmdLineArgs cl(argc, argv);
   cl.set_doc(
-"Argp example #4 -- a program with somewhat more complicated options\
-\v\
-This part of the documentation comes *after* the options; \
+      "Argp example #4 -- a program with somewhat more complicated options");
+  cl.set_args_doc("ARG1 [STRING...]");
+  cl.set_footer(
+"This part of the documentation comes *after* the options; \
 note that the text is automatically filled, but it's possible \
 to force a line-break, e.g.\n<-- here.");
-  cl.set_args_doc("ARG1 [STRING...]");
   cl.option("verbose", "Produce verbose output",   &verbose, 'v');
   cl.option("quiet",   "Don't produce any output", &silent,  'q');
   cl.alias ("silent", 's');
@@ -110,8 +109,7 @@ to force a line-break, e.g.\n<-- here.");
   cl.parse();
   if (abort)
     error(10, 0, "ABORTED");
-  if (cl.sources().size() < 1)
-  {
+  if (cl.sources().size() < 1) {
     cl.display_usage();
     return 3;
   }
@@ -120,13 +118,13 @@ to force a line-break, e.g.\n<-- here.");
   for (int i = 1; i < sources.size(); ++i)
     strings.push_back(sources[i]);
 }
-catch (std::string& msg)
-{
+catch (const std::string& msg) {
   cout << "error: " << msg << endl;
   return 3;
 }
 ```
-In this example we use a footer for our help. The options `verbose`, `quiet`, `silent` and `output` are well-known from previous examples. The option `repeat` is associated with an `int repeat_count`, which is how many times the option-specified variables are printed on the screen. If `abort` is given, the program exits with error code 10 displaying the message "ABORTED". We want these two options grouped under the header `The following options should be grouped together`. The job is done by the method `doc_header()`. Here is the output of the `--help` option:
+
+In this example, we use a footer for our help. The options `verbose`, `quiet`, `silent`, and `output` are well-known from previous examples. The option `repeat` is associated with an `int repeat_count`, which is how many times the option-specified variables are printed on the screen. If `abort` is given, the program exits with error code 10 displaying the message "ABORTED". We want these two options grouped under the header `The following options should be grouped together`. The job is done by the method `doc_header()`. Here is the output of the `--help` option:
 
 ```
 $ Usage: example-gnu-4 [OPTION...] ARG1 [STRING...]
@@ -149,7 +147,7 @@ $ Mandatory or optional arguments to long options are also mandatory or optional
 $ for any corresponding short options.
 $
 $ This part of the documentation comes *after* the options; note that the text is
-$ automatically filled, but it's possible to force a line-break, e.g.
+$ automatically filled, but it's possible to force a line break, e.g.
 $ <-- here.
 $
 $ Report bugs to <bug-gnu-utils@prep.ai.mit.edu>.
@@ -165,48 +163,47 @@ $ VERBOSE = no
 $ SILENT = no
 ```
 
-If we additionally give the option `-r3` or `--repeat=3` the output is printed three times.
+If we additionally give the option `-r3` or `--repeat=3`, the output is printed three times.
 
-Note a slight difference from the original implementation: in the original argp example the argument of `repeat` is optional and `repeat_count` has two defaults: 1, if no `repeat` option is given in the command line, and 10, if the `repeat` option is given without argument. This programming style is not supported by the **clparser** **argp** interface. Of course, at need one can implement dual-default-value variables by declaring an additional `boolean` option.
+Note a slight difference from the original GNU implementation: in the original argp example the argument of `repeat` is optional and `repeat_count` has two defaults: 1, if no `repeat` option is given in the command line, and 10, if the `repeat` option is given without argument. This programming style is not supported by the **argp** interface. One can implement dual-default-value variables in **argp** by declaring an additional `boolean` option.
 
 >In `cl.option("abort", ..., OPT_ABORT)` the *option identifier* `OPT_ABORT` is manually set. This practice is <u>strongly discouraged</u>, unless you know what you are doing. When the option identifier is not a printable character, let **clparser** automatically select one for you.
 
 #### 9.3 More argp groups
-Option headers is not the only way to define groups of options with **argp**. One can alternatively use the method **CmdLineArgs::begin_group()** on top of each set of options which will appear as a group under a heading, when help is dislayed. The header of the group is passed as argument to the method call. Look at the following example (`example-93.cpp`):
+
+Besides _option headers_, you can use the method **CmdLineArgs::begin_group()** on top of a set of options to make them appear in the help text as a group under a heading. The header of the group is passed as an argument to the method call. Take a look at the following example (`example-93.cpp`):
 
 ```c++
-	int num1 = 1, num2 = 2, num3 = 3;
-	int int1 = 1, int2 = 2, int3 = 3;
-	double fp1 = 0., fp2 = 0., fp3 = 0.;
-	string str1("group 1"), str2("group 2"), str3("group 3");
-	vector<string> sources;
-	try
-	{
-    CmdLineArgs cl(argc, argv);
-    cl.set_doc("Clparser argp example 9.3 -- Help groups.");
-    cl.begin_group("Group 1:");
-    cl.option("num1", "number of objects",     &num1, 'n');
-    cl.option("int1", "another number$INT",    &int1, 'i');
-    cl.option("fp1",  "floating-point number", &fp1,  'f');
-    cl.option("str1", "a string",              &str1, 's');
-    cl.begin_group("Group 2:");
-    cl.option("num2", "number of objects",     &num2);
-    cl.option("int2", "another number$INT",    &int2);
-    cl.option("fp2",  "floating-point number", &fp2 );
-    cl.option("str2", "a string",              &str2);
-    cl.begin_group("Group 3:");
-    cl.option("num3", "number of objects",     &num3);
-    cl.option("int3", "another number$INT",    &int3);
-    cl.option("fp3",  "floating-point number", &fp3 );
-    cl.option("str3", "a string",              &str3);
-    cl.parse();
-    sources = cl.sources();
-  }
-  catch (string& error_msg)
-  {
-    cout << "error: " << error_msg << endl;
-    return 1;
-  }
+int num1 = 1, num2 = 2, num3 = 3;
+int int1 = 1, int2 = 2, int3 = 3;
+double fp1 = 0., fp2 = 0., fp3 = 0.;
+string str1("group 1"), str2("group 2"), str3("group 3");
+vector<string> sources;
+try {
+  CmdLineArgs cl(argc, argv);
+  cl.set_doc("Clparser argp example 9.3 -- Help groups.");
+  cl.begin_group("Group 1:");
+  cl.option("num1", "number of objects",     &num1, 'n');
+  cl.option("int1", "another number$INT",    &int1, 'i');
+  cl.option("fp1",  "floating-point number", &fp1,  'f');
+  cl.option("str1", "a string",              &str1, 's');
+  cl.begin_group("Group 2:");
+  cl.option("num2", "number of objects",     &num2);
+  cl.option("int2", "another number$INT",    &int2);
+  cl.option("fp2",  "floating-point number", &fp2 );
+  cl.option("str2", "a string",              &str2);
+  cl.begin_group("Group 3:");
+  cl.option("num3", "number of objects",     &num3);
+  cl.option("int3", "another number$INT",    &int3);
+  cl.option("fp3",  "floating-point number", &fp3 );
+  cl.option("str3", "a string",              &str3);
+  cl.parse();
+  sources = cl.sources();
+}
+catch (string& error_msg) {
+  cout << "error: " << error_msg << endl;
+  return 1;
+}
 ```
 
 The output of the option `--help` is:
@@ -240,4 +237,5 @@ Mandatory or optional arguments to long options are also mandatory or optional
 for any corresponding short options.
 ```
 
-[ [Prev <](tutorial-8.html "Selections and Aliases (Argp)") ] [ [Up](tutorial.html "Table of Contents") ]
+[ [Prev <](tutorial-8.html "Selections and Aliases (Argp)") ] [ [Next >](tutorial-10.html "A Challenging Example") ] [ [Up](tutorial.html "Table of Contents") ]
+

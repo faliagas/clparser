@@ -1,808 +1,219 @@
-<!DOCTYPE html>
+<!doctype HTML>
 <html>
-  <head>
-      <meta charset="utf-8" />
-      <title>tutorial-3</title>
-      <style>.markdown-preview:not([data-use-github-style]) { padding: 2em; font-size: 1.2em; color: rgb(251, 241, 199); overflow: auto; background-color: rgb(40, 40, 40); }
-.markdown-preview:not([data-use-github-style]) > :first-child { margin-top: 0px; }
-.markdown-preview:not([data-use-github-style]) h1, .markdown-preview:not([data-use-github-style]) h2, .markdown-preview:not([data-use-github-style]) h3, .markdown-preview:not([data-use-github-style]) h4, .markdown-preview:not([data-use-github-style]) h5, .markdown-preview:not([data-use-github-style]) h6 { line-height: 1.2; margin-top: 1.5em; margin-bottom: 0.5em; color: rgb(255, 255, 255); }
-.markdown-preview:not([data-use-github-style]) h1 { font-size: 2.4em; font-weight: 300; }
-.markdown-preview:not([data-use-github-style]) h2 { font-size: 1.8em; font-weight: 400; }
-.markdown-preview:not([data-use-github-style]) h3 { font-size: 1.5em; font-weight: 500; }
-.markdown-preview:not([data-use-github-style]) h4 { font-size: 1.2em; font-weight: 600; }
-.markdown-preview:not([data-use-github-style]) h5 { font-size: 1.1em; font-weight: 600; }
-.markdown-preview:not([data-use-github-style]) h6 { font-size: 1em; font-weight: 600; }
-.markdown-preview:not([data-use-github-style]) strong { color: rgb(255, 255, 255); }
-.markdown-preview:not([data-use-github-style]) del { color: rgb(246, 222, 123); }
-.markdown-preview:not([data-use-github-style]) a, .markdown-preview:not([data-use-github-style]) a code { color: rgb(168, 153, 132); }
-.markdown-preview:not([data-use-github-style]) img { max-width: 100%; }
-.markdown-preview:not([data-use-github-style]) > p { margin-top: 0px; margin-bottom: 1.5em; }
-.markdown-preview:not([data-use-github-style]) > ul, .markdown-preview:not([data-use-github-style]) > ol { margin-bottom: 1.5em; }
-.markdown-preview:not([data-use-github-style]) blockquote { margin: 1.5em 0px; font-size: inherit; color: rgb(246, 222, 123); border-color: rgb(81, 81, 81); border-width: 4px; }
-.markdown-preview:not([data-use-github-style]) hr { margin: 3em 0px; border-top: 2px dashed rgb(81, 81, 81); background: none; }
-.markdown-preview:not([data-use-github-style]) table { margin: 1.5em 0px; }
-.markdown-preview:not([data-use-github-style]) th { color: rgb(255, 255, 255); }
-.markdown-preview:not([data-use-github-style]) th, .markdown-preview:not([data-use-github-style]) td { padding: 0.66em 1em; border: 1px solid rgb(81, 81, 81); }
-.markdown-preview:not([data-use-github-style]) code { color: rgb(255, 255, 255); background-color: rgb(60, 60, 60); }
-.markdown-preview:not([data-use-github-style]) pre.editor-colors { margin: 1.5em 0px; padding: 1em; font-size: 0.92em; border-radius: 3px; background-color: rgb(50, 50, 50); }
-.markdown-preview:not([data-use-github-style]) kbd { color: rgb(255, 255, 255); border-width: 1px 1px 2px; border-style: solid; border-color: rgb(81, 81, 81) rgb(81, 81, 81) rgb(66, 66, 66); background-color: rgb(60, 60, 60); }
-.markdown-preview[data-use-github-style] { font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif; line-height: 1.6; word-wrap: break-word; padding: 30px; font-size: 16px; color: rgb(51, 51, 51); overflow: scroll; background-color: rgb(255, 255, 255); }
-.markdown-preview[data-use-github-style] > :first-child { margin-top: 0px !important; }
-.markdown-preview[data-use-github-style] > :last-child { margin-bottom: 0px !important; }
-.markdown-preview[data-use-github-style] a:not([href]) { color: inherit; text-decoration: none; }
-.markdown-preview[data-use-github-style] .absent { color: rgb(204, 0, 0); }
-.markdown-preview[data-use-github-style] .anchor { position: absolute; top: 0px; left: 0px; display: block; padding-right: 6px; padding-left: 30px; margin-left: -30px; }
-.markdown-preview[data-use-github-style] .anchor:focus { outline: none; }
-.markdown-preview[data-use-github-style] h1, .markdown-preview[data-use-github-style] h2, .markdown-preview[data-use-github-style] h3, .markdown-preview[data-use-github-style] h4, .markdown-preview[data-use-github-style] h5, .markdown-preview[data-use-github-style] h6 { position: relative; margin-top: 1em; margin-bottom: 16px; font-weight: bold; line-height: 1.4; }
-.markdown-preview[data-use-github-style] h1 .octicon-link, .markdown-preview[data-use-github-style] h2 .octicon-link, .markdown-preview[data-use-github-style] h3 .octicon-link, .markdown-preview[data-use-github-style] h4 .octicon-link, .markdown-preview[data-use-github-style] h5 .octicon-link, .markdown-preview[data-use-github-style] h6 .octicon-link { display: none; color: rgb(0, 0, 0); vertical-align: middle; }
-.markdown-preview[data-use-github-style] h1:hover .anchor, .markdown-preview[data-use-github-style] h2:hover .anchor, .markdown-preview[data-use-github-style] h3:hover .anchor, .markdown-preview[data-use-github-style] h4:hover .anchor, .markdown-preview[data-use-github-style] h5:hover .anchor, .markdown-preview[data-use-github-style] h6:hover .anchor { padding-left: 8px; margin-left: -30px; text-decoration: none; }
-.markdown-preview[data-use-github-style] h1:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h2:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h3:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h4:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h5:hover .anchor .octicon-link, .markdown-preview[data-use-github-style] h6:hover .anchor .octicon-link { display: inline-block; }
-.markdown-preview[data-use-github-style] h1 tt, .markdown-preview[data-use-github-style] h2 tt, .markdown-preview[data-use-github-style] h3 tt, .markdown-preview[data-use-github-style] h4 tt, .markdown-preview[data-use-github-style] h5 tt, .markdown-preview[data-use-github-style] h6 tt, .markdown-preview[data-use-github-style] h1 code, .markdown-preview[data-use-github-style] h2 code, .markdown-preview[data-use-github-style] h3 code, .markdown-preview[data-use-github-style] h4 code, .markdown-preview[data-use-github-style] h5 code, .markdown-preview[data-use-github-style] h6 code { font-size: inherit; }
-.markdown-preview[data-use-github-style] h1 { padding-bottom: 0.3em; font-size: 2.25em; line-height: 1.2; border-bottom: 1px solid rgb(238, 238, 238); }
-.markdown-preview[data-use-github-style] h1 .anchor { line-height: 1; }
-.markdown-preview[data-use-github-style] h2 { padding-bottom: 0.3em; font-size: 1.75em; line-height: 1.225; border-bottom: 1px solid rgb(238, 238, 238); }
-.markdown-preview[data-use-github-style] h2 .anchor { line-height: 1; }
-.markdown-preview[data-use-github-style] h3 { font-size: 1.5em; line-height: 1.43; }
-.markdown-preview[data-use-github-style] h3 .anchor { line-height: 1.2; }
-.markdown-preview[data-use-github-style] h4 { font-size: 1.25em; }
-.markdown-preview[data-use-github-style] h4 .anchor { line-height: 1.2; }
-.markdown-preview[data-use-github-style] h5 { font-size: 1em; }
-.markdown-preview[data-use-github-style] h5 .anchor { line-height: 1.1; }
-.markdown-preview[data-use-github-style] h6 { font-size: 1em; color: rgb(119, 119, 119); }
-.markdown-preview[data-use-github-style] h6 .anchor { line-height: 1.1; }
-.markdown-preview[data-use-github-style] p, .markdown-preview[data-use-github-style] blockquote, .markdown-preview[data-use-github-style] ul, .markdown-preview[data-use-github-style] ol, .markdown-preview[data-use-github-style] dl, .markdown-preview[data-use-github-style] table, .markdown-preview[data-use-github-style] pre { margin-top: 0px; margin-bottom: 16px; }
-.markdown-preview[data-use-github-style] hr { height: 4px; padding: 0px; margin: 16px 0px; border: 0px none; background-color: rgb(231, 231, 231); }
-.markdown-preview[data-use-github-style] ul, .markdown-preview[data-use-github-style] ol { padding-left: 2em; }
-.markdown-preview[data-use-github-style] ul.no-list, .markdown-preview[data-use-github-style] ol.no-list { padding: 0px; list-style-type: none; }
-.markdown-preview[data-use-github-style] ul ul, .markdown-preview[data-use-github-style] ul ol, .markdown-preview[data-use-github-style] ol ol, .markdown-preview[data-use-github-style] ol ul { margin-top: 0px; margin-bottom: 0px; }
-.markdown-preview[data-use-github-style] li > p { margin-top: 16px; }
-.markdown-preview[data-use-github-style] dl { padding: 0px; }
-.markdown-preview[data-use-github-style] dl dt { padding: 0px; margin-top: 16px; font-size: 1em; font-style: italic; font-weight: bold; }
-.markdown-preview[data-use-github-style] dl dd { padding: 0px 16px; margin-bottom: 16px; }
-.markdown-preview[data-use-github-style] blockquote { padding: 0px 15px; color: rgb(119, 119, 119); border-left: 4px solid rgb(221, 221, 221); }
-.markdown-preview[data-use-github-style] blockquote > :first-child { margin-top: 0px; }
-.markdown-preview[data-use-github-style] blockquote > :last-child { margin-bottom: 0px; }
-.markdown-preview[data-use-github-style] table { display: block; width: 100%; overflow: auto; word-break: keep-all; }
-.markdown-preview[data-use-github-style] table th { font-weight: bold; }
-.markdown-preview[data-use-github-style] table th, .markdown-preview[data-use-github-style] table td { padding: 6px 13px; border: 1px solid rgb(221, 221, 221); }
-.markdown-preview[data-use-github-style] table tr { border-top: 1px solid rgb(204, 204, 204); background-color: rgb(255, 255, 255); }
-.markdown-preview[data-use-github-style] table tr:nth-child(2n) { background-color: rgb(248, 248, 248); }
-.markdown-preview[data-use-github-style] img { max-width: 100%; box-sizing: border-box; }
-.markdown-preview[data-use-github-style] .emoji { max-width: none; }
-.markdown-preview[data-use-github-style] span.frame { display: block; overflow: hidden; }
-.markdown-preview[data-use-github-style] span.frame > span { display: block; float: left; width: auto; padding: 7px; margin: 13px 0px 0px; overflow: hidden; border: 1px solid rgb(221, 221, 221); }
-.markdown-preview[data-use-github-style] span.frame span img { display: block; float: left; }
-.markdown-preview[data-use-github-style] span.frame span span { display: block; padding: 5px 0px 0px; clear: both; color: rgb(51, 51, 51); }
-.markdown-preview[data-use-github-style] span.align-center { display: block; overflow: hidden; clear: both; }
-.markdown-preview[data-use-github-style] span.align-center > span { display: block; margin: 13px auto 0px; overflow: hidden; text-align: center; }
-.markdown-preview[data-use-github-style] span.align-center span img { margin: 0px auto; text-align: center; }
-.markdown-preview[data-use-github-style] span.align-right { display: block; overflow: hidden; clear: both; }
-.markdown-preview[data-use-github-style] span.align-right > span { display: block; margin: 13px 0px 0px; overflow: hidden; text-align: right; }
-.markdown-preview[data-use-github-style] span.align-right span img { margin: 0px; text-align: right; }
-.markdown-preview[data-use-github-style] span.float-left { display: block; float: left; margin-right: 13px; overflow: hidden; }
-.markdown-preview[data-use-github-style] span.float-left span { margin: 13px 0px 0px; }
-.markdown-preview[data-use-github-style] span.float-right { display: block; float: right; margin-left: 13px; overflow: hidden; }
-.markdown-preview[data-use-github-style] span.float-right > span { display: block; margin: 13px auto 0px; overflow: hidden; text-align: right; }
-.markdown-preview[data-use-github-style] code, .markdown-preview[data-use-github-style] tt { padding: 0.2em 0px; margin: 0px; font-size: 85%; border-radius: 3px; background-color: rgba(0, 0, 0, 0.0392157); }
-.markdown-preview[data-use-github-style] code::before, .markdown-preview[data-use-github-style] tt::before, .markdown-preview[data-use-github-style] code::after, .markdown-preview[data-use-github-style] tt::after { letter-spacing: -0.2em; content: " "; }
-.markdown-preview[data-use-github-style] code br, .markdown-preview[data-use-github-style] tt br { display: none; }
-.markdown-preview[data-use-github-style] del code { text-decoration: inherit; }
-.markdown-preview[data-use-github-style] pre > code { padding: 0px; margin: 0px; font-size: 100%; word-break: normal; white-space: pre; border: 0px; background: transparent; }
-.markdown-preview[data-use-github-style] .highlight { margin-bottom: 16px; }
-.markdown-preview[data-use-github-style] .highlight pre, .markdown-preview[data-use-github-style] pre { padding: 16px; overflow: auto; font-size: 85%; line-height: 1.45; border-radius: 3px; background-color: rgb(52, 52, 52); }
-.markdown-preview[data-use-github-style] .highlight pre { margin-bottom: 0px; word-break: normal; }
-.markdown-preview[data-use-github-style] pre { word-wrap: normal; }
-.markdown-preview[data-use-github-style] pre code, .markdown-preview[data-use-github-style] pre tt { display: inline; max-width: initial; padding: 0px; margin: 0px; overflow: initial; line-height: inherit; word-wrap: normal; border: 0px; background-color: transparent; }
-.markdown-preview[data-use-github-style] pre code::before, .markdown-preview[data-use-github-style] pre tt::before, .markdown-preview[data-use-github-style] pre code::after, .markdown-preview[data-use-github-style] pre tt::after { content: normal; }
-.markdown-preview[data-use-github-style] kbd { display: inline-block; padding: 3px 5px; font-size: 11px; line-height: 10px; color: rgb(85, 85, 85); vertical-align: middle; border-width: 1px; border-style: solid; border-color: rgb(204, 204, 204) rgb(204, 204, 204) rgb(187, 187, 187); border-radius: 3px; box-shadow: rgb(187, 187, 187) 0px -1px 0px inset; background-color: rgb(252, 252, 252); }
-.markdown-preview[data-use-github-style] a { color: rgb(51, 122, 183); }
-.markdown-preview[data-use-github-style] code { color: inherit; }
-.markdown-preview[data-use-github-style] pre.editor-colors { padding: 0.8em 1em; margin-bottom: 1em; font-size: 0.85em; border-radius: 4px; overflow: auto; }
-.scrollbars-visible-always .markdown-preview pre.editor-colors .vertical-scrollbar, .scrollbars-visible-always .markdown-preview pre.editor-colors .horizontal-scrollbar { visibility: hidden; }
-.scrollbars-visible-always .markdown-preview pre.editor-colors:hover .vertical-scrollbar, .scrollbars-visible-always .markdown-preview pre.editor-colors:hover .horizontal-scrollbar { visibility: visible; }
-.markdown-preview .task-list-item-checkbox { position: absolute; margin: 0.25em 0px 0px -1.4em; }
-.bracket-matcher .region {
-  border-bottom: 1px dotted lime;
-  position: absolute;
-}
+<head><meta charset="utf-8">
+  <title>tutorial-8</title>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js">
+  </script>
+  <script>hljs.highlightAll();</script>
+  <style type='text/css'>
+  html{font-size:62.5%}body{font-family:Helvetica,Arial,sans-serif;font-size:150%;line-height:1.3;color:#f6e6cc;width:55%;margin:auto;background:#27221a;position:relative;padding:0 30px}dl,ol,p,pre,table,ul{margin-bottom:1em}ul{margin-left:20px}a{text-decoration:none;cursor:pointer;color:#ba832c;font-weight:700}a:focus{outline:dotted 1px}a:focus,a:hover{color:#d3a459;text-decoration:none}a *,button *{cursor:pointer}hr{display:none}small{font-size:90%}button,input,option,select,textarea{font-family:Arial,"Lucida Grande","Lucida Sans Unicode",Arial,Verdana,sans-serif;font-size:100%}button,input[type=submit],label,option,select{cursor:pointer}.group:after{content:".";display:block;height:0;clear:both;visibility:hidden}* html .group{height:1%}.group{display:block}sup{font-size:80%;line-height:1;vertical-align:super}button::-moz-focus-inner{border:0;padding:1px}span.amp{font-family:Baskerville,"Goudy Old Style",Palatino,"Book Antiqua",serif;font-weight:400;font-style:italic;font-size:1.2em;line-height:.8}h1,h2,h3,h4,h5,h6{line-height:1.1;font-family:Baskerville,"Goudy Old Style",Palatino,"Book Antiqua",serif}h2{font-size:22pt}h3{font-size:20pt}h4{font-size:18pt}h5{font-size:16pt}h6{font-size:14pt}::selection{background:#745626}::-moz-selection{background:#745626}h1{font-size:420%;margin:0 0 .1em;font-family:Baskerville,"Goudy Old Style",Palatino,"Book Antiqua",serif}h1 a,h1 a:hover{color:#d7af72;font-weight:400;text-decoration:none}pre{background:rgba(0,0,0,.3);color:#fff;padding:0px 0px;border-radius:.4em;-moz-border-radius:.4em;-webkit-border-radius:.4em;overflow-x:hidden}pre code{font-size:10pt}.thumb{float:left;margin:10px}table{border-collapse:collapse}td,th{border:1px solid #f6e6cc;padding:.5rem;text-align:left}
 
-.spell-check-misspelling .region {
-  border-bottom: 2px dotted rgba(255, 51, 51, 0.75);
-}
-.spell-check-corrections {
-  width: 25em !important;
-}
+  </style>
+</head>
+<body>
+<p>[ <a href="tutorial-2.html" title="Displaying Reports and Executing Commands">Prev &lt;</a> ] [ <a href="tutorial-4.html" title="Sources and Data Validation">Next ></a> ] [ <a href="tutorial.html" title="Table of Contents">Up</a> ]</p>
 
-pre.editor-colors {
-  background-color: #282828;
-  color: #fbf1c7;
-}
-pre.editor-colors .wrap-guide {
-  background-color: rgba(235, 219, 178, 0.15);
-}
-pre.editor-colors .indent-guide {
-  color: rgba(235, 219, 178, 0.15);
-}
-pre.editor-colors .invisible-character,
-pre.editor-colors .invisible {
-  color: #504945;
-}
-pre.editor-colors .gutter {
-  background-color: #282828;
-  color: #928374;
-}
-pre.editor-colors .gutter .line-number.cursor-line {
-  background-color: #3c3836;
-  color: #928374;
-}
-pre.editor-colors .gutter .line-number.cursor-line-no-selection {
-  color: #fabd2f;
-}
-pre.editor-colors .line.cursor-line {
-  background-color: rgba(80, 73, 69, 0.5);
-}
-pre.editor-colors .line.cursor-line .invisible-character,
-pre.editor-colors .line.cursor-line .invisible {
-  color: #665c54;
-}
-pre.editor-colors .gutter .line-number.folded,
-pre.editor-colors .gutter .line-number:after,
-pre.editor-colors .fold-marker:after {
-  color: #928374;
-}
-pre.editor-colors .cursor {
-  color: #a89984;
-}
-pre.editor-colors .selection .region {
-  background-color: #3c3836;
-}
-pre.editor-colors .bracket-matcher .region {
-  border-bottom: 1px solid #d5c4a1;
-}
-pre.editor-colors .find-result .region,
-pre.editor-colors.editor .find-result .region {
-  background-color: transparent;
-  border: 1px solid #fabd2f;
-}
-pre.editor-colors.editor .highlights .selection .region {
-  background-color: #504945;
-}
-pre.editor-colors.editor .current-result .region {
-  background-color: transparent;
-  border: 1px solid transparent;
-}
-.editor--private .syntax--text {
-  color: inherit;
-}
-.indent-guide-improved {
-  background-color: rgba(235, 219, 178, 0.15);
-}
-.indent-guide-improved.indent-guide-stack {
-  background-color: #665c54;
-}
-.indent-guide-improved.indent-guide-stack.indent-guide-active {
-  background-color: #928374;
-}
-.syntax--meta.syntax--arguments,
-.syntax--meta.syntax--method.syntax--syntax--body.syntax--syntax--java,
-.syntax--syntax--meta.syntax--syntax--method.syntax--body.syntax--source.syntax--cs,
-.syntax--none,
-.syntax--source,
-.syntax--text,
-.syntax--meta.syntax--set.syntax--variable,
-.syntax--meta.syntax--property-value .syntax--keyword.syntax--control.syntax--html.syntax--custom.syntax--elements,
-.syntax--markup.syntax--code .syntax--source,
-.syntax--variable.syntax--other.syntax--property,
-.syntax--constant.syntax--other.syntax--property,
-.syntax--meta.syntax--arguments .syntax--meta.syntax--function .syntax--variable {
-  color: #fbf1c7;
-}
-.syntax--entity.syntax--quasi.syntax--element .syntax--meta.syntax--group.syntax--braces,
-.syntax--keyword.syntax--operator .syntax--keyword.syntax--operator.syntax--neon,
-.syntax--keyword.syntax--operator .syntax--operator.syntax--neon,
-.syntax--keyword.syntax--other.syntax--accessor,
-.syntax--meta.syntax--attribute-selector .syntax--keyword.syntax--operator.syntax--stylus,
-.syntax--meta.syntax--brace,
-.syntax--meta.syntax--delimiter,
-.syntax--meta.syntax--group.syntax--braces,
-.syntax--meta.syntax--punctuation.syntax--separator,
-.syntax--meta.syntax--separator,
-.syntax--punctuation,
-.syntax--punctuation.syntax--definition.syntax--string,
-.syntax--meta.syntax--delimiter.syntax--method.syntax--period {
-  color: #fbf1c7;
-}
-.syntax--comment,
-.syntax--comment .syntax--text,
-.syntax--markup.syntax--strikethrough,
-.syntax--punctuation.syntax--definition.syntax--comment,
-.syntax--punctuation.syntax--whitespace.syntax--comment,
-.syntax--string.syntax--comment,
-.syntax--text.syntax--cancelled,
-.syntax--comment.syntax--block.syntax--documentation .syntax--entity,
-.syntax--comment.syntax--block.syntax--documentation .syntax--variable {
-  font-style: italic;
-  color: #928374;
-}
-.syntax--comment.syntax--keyword,
-.syntax--comment.syntax--keyword.syntax--punctuation {
-  color: #d5c4a1;
-}
-.syntax--comment.syntax--parameter,
-.syntax--comment.syntax--punctuation,
-.syntax--comment.syntax--string,
-.syntax--comment.syntax--type,
-.syntax--keyword.syntax--other.syntax--phpdoc.syntax--php,
-.syntax--punctuation.syntax--definition.syntax--keyword.syntax--javadoc,
-.syntax--source.syntax--groovy .syntax--keyword.syntax--other.syntax--documentation,
-.syntax--source.syntax--java .syntax--keyword.syntax--other.syntax--documentation,
-.syntax--storage.syntax--type.syntax--annotation.syntax--coffee,
-.syntax--storage.syntax--type.syntax--class.syntax--jsdoc {
-  color: #bdae93;
-}
-.syntax--constant.syntax--language.syntax--name,
-.syntax--entity.syntax--name.syntax--type,
-.syntax--entity.syntax--other.syntax--inherited-class {
-  color: #fabd2f;
-}
-.syntax--entity.syntax--name.syntax--tag.syntax--mustache,
-.syntax--entity.syntax--tag.syntax--tagbraces,
-.syntax--punctuation.syntax--definition.syntax--string.syntax--template,
-.syntax--string.syntax--quoted.syntax--template .syntax--punctuation.syntax--definition,
-.syntax--punctuation.syntax--definition.syntax--template-expression,
-.syntax--punctuation.syntax--quasi,
-.syntax--punctuation.syntax--section.syntax--embedded,
-.syntax--punctuation.syntax--section.syntax--embedded .syntax--source,
-.syntax--string.syntax--interpolated,
-.syntax--variable.syntax--other.syntax--interpolation.syntax--scss,
-.syntax--variable.syntax--interpolation.syntax--scss,
-.syntax--punctuation.syntax--definition.syntax--interpolation {
-  color: #8ec07c;
-}
-.syntax--js.syntax--embedded.syntax--control.syntax--flow .syntax--keyword.syntax--operator.syntax--js,
-.syntax--keyword,
-.syntax--keyword.syntax--control,
-.syntax--keyword.syntax--operator.syntax--logical.syntax--python,
-.syntax--meta.syntax--at-rule.syntax--media .syntax--support.syntax--function.syntax--misc,
-.syntax--meta.syntax--prolog.syntax--haml,
-.syntax--meta.syntax--tag.syntax--sgml.syntax--doctype.syntax--html,
-.syntax--comment.syntax--other.syntax--doctype.syntax--jade,
-.syntax--source.syntax--cs .syntax--keyword.syntax--operator,
-.syntax--storage.syntax--type.syntax--function.syntax--jade,
-.syntax--storage.syntax--type.syntax--function.syntax--pug,
-.syntax--storage.syntax--type.syntax--import.syntax--haxe,
-.syntax--storage.syntax--type.syntax--import.syntax--include.syntax--jade,
-.syntax--storage.syntax--type.syntax--import.syntax--include.syntax--pug,
-.syntax--variable.syntax--documentroot,
-.syntax--meta.syntax--at-rule .syntax--keyword.syntax--control.syntax--at-rule,
-.syntax--punctuation.syntax--definition.syntax--directive,
-.syntax--variable.syntax--language.syntax--default.syntax--js {
-  color: #fb4934;
-}
-.syntax--comment.syntax--other.syntax--doctype.syntax--jade {
-  font-style: normal;
-}
-.syntax--keyword.syntax--control.syntax--at-rule .syntax--support.syntax--type.syntax--property-vendor,
-.syntax--punctuation.syntax--definition.syntax--keyword {
-  color: #cc241d;
-}
-.syntax--keyword.syntax--control.syntax--new,
-.syntax--keyword.syntax--control.syntax--operator,
-.syntax--keyword.syntax--operator,
-.syntax--keyword.syntax--other.syntax--arrow,
-.syntax--keyword.syntax--other.syntax--double-colon,
-.syntax--storage.syntax--type.syntax--arrow,
-.syntax--meta.syntax--attribute-selector .syntax--punctuation.syntax--separator.syntax--operator,
-.syntax--support.syntax--constant.syntax--mathematical-symbols,
-.syntax--entity.syntax--other.syntax--attribute-name.syntax--parent-selector .syntax--punctuation {
-  color: #8ec07c;
-}
-.syntax--constant.syntax--other.syntax--color .syntax--punctuation.syntax--definition.syntax--constant,
-.syntax--constant.syntax--other.syntax--unit,
-.syntax--keyword.syntax--other.syntax--unit,
-.syntax--punctuation.syntax--section.syntax--flowtype {
-  color: #b16286;
-}
-.syntax--storage,
-.syntax--storage.syntax--type.syntax--annotation,
-.syntax--storage.syntax--type.syntax--primitive {
-  color: #fb4934;
-}
-.syntax--storage.syntax--modifier.syntax--import,
-.syntax--storage.syntax--modifier.syntax--package,
-.syntax--storage.syntax--type.syntax--import,
-.syntax--variable.syntax--import,
-.syntax--variable.syntax--package {
-  color: #fbf1c7;
-}
-.syntax--entity.syntax--quasi.syntax--tag.syntax--name,
-.syntax--meta.syntax--function .syntax--storage.syntax--type.syntax--matlab,
-.syntax--storage.syntax--type.syntax--function {
-  color: #8ec07c;
-}
-.syntax--entity.syntax--name.syntax--val.syntax--declaration,
-.syntax--entity.syntax--name.syntax--variable,
-.syntax--meta.syntax--definition.syntax--variable,
-.syntax--storage.syntax--type.syntax--variable,
-.syntax--variable,
-.syntax--variable.syntax--interpolation .syntax--variable,
-.syntax--variable.syntax--other.syntax--interpolation .syntax--variable,
-.syntax--variable.syntax--parameter.syntax--output.syntax--function.syntax--matlab,
-.syntax--variable.syntax--parameter.syntax--sass,
-.syntax--variable.syntax--other.syntax--interpolation.syntax--less,
-.syntax--variable.syntax--control.syntax--import.syntax--include.syntax--pug {
-  color: #83a598;
-}
-.syntax--punctuation.syntax--definition.syntax--variable,
-.syntax--variable.syntax--interpolation,
-.syntax--variable.syntax--other.syntax--dollar .syntax--punctuation.syntax--dollar {
-  color: #458588;
-}
-.syntax--meta.syntax--property.syntax--object {
-  color: #fbf1c7;
-}
-.syntax--constant.syntax--other.syntax--object.syntax--key .syntax--string,
-.syntax--meta.syntax--object-literal.syntax--key {
-  color: #fbf1c7;
-}
-.syntax--meta.syntax--parameters,
-.syntax--variable.syntax--parameter {
-  color: #fbf1c7;
-}
-.syntax--variable.syntax--parameter.syntax--url {
-  color: #b8bb26;
-}
-.syntax--constant,
-.syntax--constant.syntax--numeric,
-.syntax--constant.syntax--other,
-.syntax--constant.syntax--other.syntax--color,
-.syntax--constant.syntax--other.syntax--symbol,
-.syntax--support.syntax--constant.syntax--color,
-.syntax--variable.syntax--language {
-  color: #d3869b;
-}
-.syntax--variable.syntax--other.syntax--constant,
-.syntax--constant.syntax--other.syntax--js {
-  color: #fabd2f;
-}
-.syntax--constant.syntax--character.syntax--escape,
-.syntax--constant.syntax--character.syntax--escaped,
-.syntax--constant.syntax--character.syntax--quoted,
-.syntax--constant.syntax--other.syntax--character-class.syntax--escape {
-  color: #fb4934;
-}
-.syntax--invalid {
-  color: #fbf1c7;
-  background-color: #fb4934;
-}
-.syntax--string,
-.syntax--string.syntax--quoted.syntax--interpolated {
-  color: #b8bb26;
-}
-.syntax--source.syntax--regexp,
-.syntax--string.syntax--regexp {
-  color: #b8bb26;
-}
-.syntax--string.syntax--regexp .syntax--punctuation.syntax--definition.syntax--string {
-  color: #bdae93;
-}
-.syntax--keyword.syntax--control.syntax--set.syntax--regexp,
-.syntax--punctuation.syntax--definition.syntax--character-class,
-.syntax--string.syntax--regexp.syntax--character-class.syntax--ruby {
-  color: #d3869b;
-}
-.syntax--string.syntax--regexp.syntax--group {
-  color: #fbf1c7;
-}
-.syntax--meta.syntax--assertion,
-.syntax--punctuation.syntax--definition.syntax--group.syntax--regexp {
-  color: #83a598;
-}
-.syntax--constant.syntax--other.syntax--character-class.syntax--escape.syntax--backslash.syntax--regexp,
-.syntax--keyword.syntax--control.syntax--character-class.syntax--regexp,
-.syntax--string.syntax--regexp.syntax--character-class .syntax--constant.syntax--character.syntax--escape,
-.syntax--string.syntax--regexp .syntax--constant.syntax--character.syntax--character-class {
-  color: #fabd2f;
-}
-.syntax--string.syntax--regexp.syntax--arbitrary-repetition,
-.syntax--string.syntax--regexp.syntax--arbitrary-repetition .syntax--punctuation {
-  color: #8ec07c;
-}
-.syntax--constant.syntax--other.syntax--reference.syntax--link,
-.syntax--string.syntax--other.syntax--link,
-.syntax--link .syntax--entity {
-  color: #8ec07c;
-}
-.syntax--meta.syntax--image.syntax--inline .syntax--punctuation.syntax--definition.syntax--string,
-.syntax--meta.syntax--link.syntax--inline .syntax--punctuation.syntax--definition.syntax--string,
-.syntax--meta.syntax--link.syntax--reference .syntax--punctuation.syntax--definition.syntax--constant,
-.syntax--meta.syntax--link.syntax--reference.syntax--literal .syntax--punctuation.syntax--definition.syntax--constant,
-.syntax--meta.syntax--link.syntax--reference.syntax--literal .syntax--punctuation.syntax--definition.syntax--string,
-.syntax--link .syntax--punctuation.syntax--definition {
-  color: #689d6a;
-}
-.syntax--punctuation.syntax--definition.syntax--tag {
-  color: #83a598;
-}
-.syntax--markup.syntax--heading {
-  color: #b8bb26;
-}
-.syntax--punctuation.syntax--definition.syntax--heading,
-.syntax--punctuation.syntax--definition.syntax--identity,
-.syntax--punctuation.syntax--definition.syntax--block.syntax--mustache {
-  color: #98971a;
-}
-.syntax--markup.syntax--bold {
-  font-weight: bold;
-  color: #fe8019;
-}
-.syntax--punctuation.syntax--definition.syntax--bold {
-  font-weight: bold;
-  color: #d65d0e;
-}
-.syntax--markup.syntax--italic {
-  font-style: italic;
-  color: #fb4934;
-}
-.syntax--punctuation.syntax--definition.syntax--italic {
-  font-style: italic;
-  color: #cc241d;
-}
-.syntax--markup.syntax--raw.syntax--inline,
-.syntax--markup.syntax--raw,
-.syntax--markup.syntax--code {
-  color: #fabd2f;
-}
-.syntax--markup.syntax--raw.syntax--inline .syntax--punctuation.syntax--definition.syntax--raw {
-  color: #d79921;
-}
-.syntax--markup.syntax--quote,
-.syntax--comment.syntax--quote {
-  color: #d3869b;
-}
-.syntax--markup.syntax--quote .syntax--punctuation.syntax--definition.syntax--blockquote,
-.syntax--comment.syntax--quote .syntax--support.syntax--quote {
-  color: #b16286;
-}
-.syntax--markup.syntax--list {
-  color: #83a598;
-}
-.syntax--markup.syntax--list .syntax--punctuation.syntax--definition.syntax--list_item {
-  color: #458588;
-}
-.syntax--meta.syntax--separator.syntax--markdown {
-  color: #928374;
-}
-.syntax--support.syntax--class,
-.syntax--support.syntax--type,
-.syntax--variable.syntax--other.syntax--class {
-  color: #fabd2f;
-}
-.syntax--keyword.syntax--other.syntax--special-method,
-.syntax--meta.syntax--function-call .syntax--variable.syntax--function,
-.syntax--meta.syntax--function-call .syntax--entity.syntax--name.syntax--function,
-.syntax--support.syntax--function,
-.syntax--meta.syntax--at-rule.syntax--namespace .syntax--entity.syntax--name.syntax--function,
-.syntax--source.syntax--script.syntax--jade.syntax--entity.syntax--name.syntax--function.syntax--pug {
-  color: #8ec07c;
-}
-.syntax--meta.syntax--function-call.syntax--method .syntax--variable.syntax--function,
-.syntax--meta.syntax--function-call.syntax--static .syntax--variable.syntax--function,
-.syntax--meta.syntax--method-call,
-.syntax--meta.syntax--method-call .syntax--variable.syntax--function,
-.syntax--support.syntax--function.syntax--mutator,
-.syntax--meta.syntax--method-call .syntax--entity.syntax--name.syntax--function,
-.syntax--meta.syntax--method-call .syntax--support.syntax--function {
-  color: #689d6a;
-}
-.syntax--support.syntax--module {
-  color: #d3869b;
-}
-.syntax--entity.syntax--name.syntax--accessor,
-.syntax--entity.syntax--name.syntax--function,
-.syntax--entity.syntax--name.syntax--section {
-  color: #b8bb26;
-}
-.syntax--entity.syntax--name.syntax--module,
-.syntax--entity.syntax--other.syntax--inherited-class.syntax--module {
-  color: #fe8019;
-}
-.syntax--constant.syntax--id.syntax--tag,
-.syntax--entity.syntax--name.syntax--tag.syntax--id,
-.syntax--entity.syntax--other.syntax--attribute-name.syntax--id,
-.syntax--meta.syntax--tag.syntax--attribute.syntax--id {
-  color: #fe8019;
-}
-.syntax--entity.syntax--other.syntax--attribute-name.syntax--id .syntax--punctuation.syntax--definition.syntax--entity {
-  color: #d65d0e;
-}
-.syntax--entity.syntax--name.syntax--tag.syntax--class,
-.syntax--entity.syntax--other.syntax--attribute-name.syntax--class,
-.syntax--meta.syntax--tag.syntax--attribute.syntax--class {
-  color: #fabd2f;
-}
-.syntax--meta.syntax--tag.syntax--attribute.syntax--class.syntax--jade {
-  color: #d3869b;
-}
-.syntax--entity.syntax--other.syntax--attribute-name.syntax--class .syntax--punctuation.syntax--definition.syntax--entity {
-  color: #d79921;
-}
-.syntax--meta.syntax--attribute-selector .syntax--entity.syntax--other.syntax--attribute-name.syntax--attribute,
-.syntax--meta.syntax--attribute-selector .syntax--entity.syntax--other.syntax--attribute-name.syntax--stylus {
-  color: #d79921;
-}
-.syntax--constant.syntax--character.syntax--entity .syntax--punctuation.syntax--definition.syntax--constant,
-.syntax--constant.syntax--character.syntax--entity .syntax--punctuation.syntax--definition.syntax--entity {
-  color: #b16286;
-}
-.syntax--entity.syntax--name.syntax--class,
-.syntax--entity.syntax--name.syntax--type.syntax--class {
-  color: #fabd2f;
-}
-.syntax--entity.syntax--name.syntax--function.syntax--neon,
-.syntax--entity.syntax--name.syntax--tag,
-.syntax--entity.syntax--tag,
-.syntax--keyword.syntax--control.syntax--untitled,
-.syntax--keyword.syntax--doctype.syntax--xml,
-.syntax--keyword.syntax--operator .syntax--support.syntax--other.syntax--neon,
-.syntax--punctuation.syntax--definition.syntax--prolog.syntax--haml,
-.syntax--source.syntax--less .syntax--keyword.syntax--control.syntax--html.syntax--elements {
-  color: #83a598;
-}
-.syntax--entity.syntax--name.syntax--attribute-name,
-.syntax--entity.syntax--other.syntax--attribute-name,
-.syntax--meta.syntax--section.syntax--attributes.syntax--haml .syntax--constant.syntax--other.syntax--symbol.syntax--ruby {
-  color: #fabd2f;
-}
-.syntax--entity.syntax--other.syntax--attribute-name.syntax--placeholder .syntax--punctuation.syntax--definition.syntax--entity,
-.syntax--entity.syntax--other.syntax--attribute-name.syntax--pseudo-class,
-.syntax--entity.syntax--other.syntax--attribute-name.syntax--pseudo-element,
-.syntax--entity.syntax--other.syntax--attribute-name.syntax--tag.syntax--pseudo-class,
-.syntax--entity.syntax--other.syntax--attribute-name.syntax--tag.syntax--pseudo-element,
-.syntax--support.syntax--type.syntax--vendor-prefix {
-  color: #d79921;
-}
-.syntax--entity.syntax--function-name.syntax--stylus,
-.syntax--entity.syntax--other.syntax--animation-keyframe.syntax--stylus,
-.syntax--entity.syntax--other.syntax--animation-name,
-.syntax--keyword.syntax--language.syntax--function.syntax--misc.syntax--stylus,
-.syntax--meta.syntax--at-rule.syntax--keyframes .syntax--entity.syntax--name.syntax--function,
-.syntax--variable.syntax--other.syntax--animation-name {
-  color: #8ec07c;
-}
-.syntax--meta.syntax--class.syntax--body,
-.syntax--meta.syntax--tag {
-  color: #fbf1c7;
-}
-.syntax--meta.syntax--image,
-.syntax--meta.syntax--link,
-.syntax--link .syntax--markup.syntax--underline.syntax--link {
-  color: #d3869b;
-}
-.syntax--meta.syntax--image .syntax--punctuation.syntax--definition.syntax--metadata,
-.syntax--meta.syntax--link .syntax--punctuation.syntax--definition.syntax--metadata,
-.syntax--link .syntax--markup.syntax--underline.syntax--link .syntax--punctuation.syntax--definition {
-  color: #b16286;
-}
-.syntax--meta.syntax--require {
-  color: #b8bb26;
-}
-.syntax--constant.syntax--name.syntax--attribute.syntax--tag.syntax--jade,
-.syntax--meta.syntax--brace.syntax--round,
-.syntax--punctuation.syntax--definition.syntax--parameters,
-.syntax--punctuation.syntax--definition.syntax--method-parameters,
-.syntax--punctuation.syntax--section.syntax--function.syntax--css,
-.syntax--meta.syntax--function-call .syntax--meta.syntax--group .syntax--punctuation.syntax--definition.syntax--group,
-.syntax--punctuation.syntax--separator.syntax--variable.syntax--ruby,
-.syntax--meta.syntax--function-call .syntax--punctuation.syntax--definition.syntax--arguments,
-.syntax--constant.syntax--name.syntax--attribute.syntax--tag.syntax--pug {
-  color: #bdae93;
-}
-.syntax--meta.syntax--property-name,
-.syntax--support.syntax--type.syntax--property-name {
-  color: #b8bb26;
-}
-.syntax--meta.syntax--property-name .syntax--support.syntax--type.syntax--vendor-prefix {
-  color: #98971a;
-}
-.syntax--constant.syntax--string.syntax--sass,
-.syntax--meta.syntax--property-value,
-.syntax--support.syntax--constant.syntax--property-value {
-  color: #fbf1c7;
-}
-.syntax--meta.syntax--property-value .syntax--support.syntax--type.syntax--vendor-prefix {
-  color: #bdae93;
-}
-.syntax--source.syntax--diff {
-  color: #a89984;
-}
-.syntax--meta.syntax--diff.syntax--header.syntax--from-file {
-  color: #83a598;
-}
-.syntax--punctuation.syntax--definition.syntax--from-file {
-  color: #458588;
-}
-.syntax--meta.syntax--diff.syntax--header.syntax--to-file {
-  color: #d3869b;
-}
-.syntax--punctuation.syntax--definition.syntax--to-file {
-  color: #b16286;
-}
-.syntax--meta.syntax--diff.syntax--range,
-.syntax--meta.syntax--toc-list.syntax--line-number {
-  color: #fabd2f;
-}
-.syntax--punctuation.syntax--definition.syntax--range.syntax--diff {
-  color: #d79921;
-}
-.syntax--markup.syntax--deleted,
-.syntax--punctuation.syntax--definition.syntax--deleted {
-  color: #fb4934;
-}
-.syntax--markup.syntax--inserted,
-.syntax--punctuation.syntax--definition.syntax--inserted {
-  color: #b8bb26;
-}
-.syntax--markup.syntax--changed,
-.syntax--punctuation.syntax--definition.syntax--changed {
-  color: #fabd2f;
-}
-.syntax--markup.syntax--ignored {
-  color: #928374;
-}
-.syntax--markup.syntax--untracked {
-  color: #928374;
-}
-.syntax--brackethighlighter.syntax--tag {
-  color: #bdae93;
-}
-.syntax--brackethighlighter.syntax--curly {
-  color: #bdae93;
-}
-.syntax--brackethighlighter.syntax--round {
-  color: #bdae93;
-}
-.syntax--brackethighlighter.syntax--square {
-  color: #bdae93;
-}
-.syntax--brackethighlighter.syntax--angle {
-  color: #bdae93;
-}
-.syntax--brackethighlighter.syntax--quote {
-  color: #bdae93;
-}
-.syntax--brackethighlighter.syntax--unmatched {
-  color: #fb4934;
-}
-.syntax--sublimelinter.syntax--mark.syntax--error {
-  color: #fb4934;
-}
-.syntax--sublimelinter.syntax--gutter-mark {
-  color: #928374;
-}
-.syntax--sublimelinter.syntax--mark.syntax--warning {
-  color: #fabd2f;
-}
-.syntax--raw.syntax--nibble.syntax--upper {
-  color: #fbf1c7;
-}
-.syntax--raw.syntax--nibble.syntax--lower {
-  color: #fbf1c7;
-}
-.syntax--hexviewer.syntax--highlight {
-  color: #282828;
-  background-color: #fabd2f;
-}
-.syntax--hexviewer.syntax--highlight.syntax--edited {
-  color: #282828;
-  background-color: #fe8019;
-}
-.syntax--glyph.syntax--carriage-return {
-  color: rgba(235, 219, 178, 0.15);
-}
-.syntax--glyph.syntax--new-line {
-  color: rgba(235, 219, 178, 0.15);
-}
-.syntax--keyword.syntax--control.syntax--header.syntax--todo {
-  color: #b8bb26;
-  background-color: #3a3a3a;
-}
-.syntax--notes.syntax--todo {
-  color: #bdae93;
-}
-.syntax--text.syntax--todo .syntax--punctuation.syntax--definition.syntax--bold,
-.syntax--text.syntax--todo .syntax--punctuation.syntax--definition.syntax--italic {
-  color: #7c6f64;
-}
-.syntax--meta.syntax--item.syntax--todo.syntax--pending {
-  color: #fbf1c7;
-}
-.syntax--punctuation.syntax--definition.syntax--bullet.syntax--pending.syntax--todo {
-  color: #928374;
-}
-.syntax--punctuation.syntax--definition.syntax--bullet.syntax--completed.syntax--todo {
-  color: #8ec07c;
-}
-.syntax--punctuation.syntax--definition.syntax--bullet.syntax--cancelled.syntax--todo {
-  color: #fb4934;
-}
-.syntax--string.syntax--other.syntax--tag.syntax--todo.syntax--critical {
-  font-weight: bold;
-  color: #fb4934;
-}
-.syntax--string.syntax--other.syntax--tag.syntax--todo.syntax--high {
-  font-weight: bold;
-  color: #fe8019;
-}
-.syntax--string.syntax--other.syntax--tag.syntax--todo.syntax--low {
-  font-weight: bold;
-  color: #83a598;
-}
-.syntax--string.syntax--other.syntax--tag.syntax--todo.syntax--today {
-  font-weight: bold;
-  color: #fabd2f;
-}
-.syntax--meta.syntax--tag.syntax--todo {
-  color: #d3869b;
-}
-.syntax--punctuation.syntax--definition.syntax--url,
-.syntax--todo.syntax--url {
-  color: #83a598;
-}
-.syntax--meta.syntax--punctuation.syntax--archive.syntax--todo,
-.syntax--meta.syntax--punctuation.syntax--separator.syntax--todo {
-  font-style: italic;
-  color: #928374;
-}
-</style>
-  </head>
-  <body class='markdown-preview' data-use-github-style><p>[ <a href="tutorial-2.html" title="Displaying Reports and Executing Commands">Prev &lt;</a> ] [ <a href="tutorial-4.html" title="Sources and Data Validation">Next &gt;</a> ] [ <a href="tutorial.html" title="Table of Contents">Up</a> ]</p>
-<h3 id="lesson-3-selections-mutually-exclusive-options-aliases">Lesson 3: Selections - Mutually Exclusive Options - Aliases</h3>
-<p>In this lesson you will learn how to use certain utilities offered by <strong>clparser</strong> to make your code simpler and more efficient. Specifically, you will learn how to</p>
+<h3>Lesson 3: Selections - Mutually Exclusive Options - Aliases</h3>
+
+<p>In this lesson, you will learn how to use some utilities offered by <strong>clparser</strong> to make your code simpler and more efficient. Specifically, you will learn how to</p>
+
 <ul>
-<li><p>efficiently program options for indexes into vectors and arrays (selections)</p>
-</li>
-<li><p>define mutually exclusive groups of options, and</p>
-</li>
-<li><p>declare aliases, i.e. different options producing the same effect.</p>
-</li>
+<li><p>efficiently program options for indexes into vectors and arrays (<em>selections</em>)</p></li>
+<li><p>define mutually exclusive groups of options, and</p></li>
+<li><p>declare aliases, i.e. different options producing the same effect.</p></li>
 </ul>
-<h4 id="3-1-selections">3.1 Selections</h4>
-<p>Assume we have a string array</p>
-<pre class="editor-colors lang-c++"><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--storage syntax--modifier syntax--c"><span>const</span></span><span>&nbsp;</span><span class="syntax--storage syntax--type syntax--c"><span>char</span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>*</span></span><span>fruits&nbsp;</span><span class="syntax--keyword syntax--operator syntax--assignment syntax--c"><span>=</span></span><span>&nbsp;</span><span class="syntax--meta syntax--block syntax--c"><span class="syntax--punctuation syntax--section syntax--block syntax--begin syntax--bracket syntax--curly syntax--c"><span>{</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>apple</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>orange</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>peach</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>melon</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span class="syntax--punctuation syntax--section syntax--block syntax--end syntax--bracket syntax--curly syntax--c"><span>}</span></span></span><span>;</span></span></div></pre>
-<p>and we would like to let the user select an entry of this array. We can implement this by declaring an integer <code style="font-family: Monaco;">selection</code>, so that the selected entry will be <code style="font-family: Monaco;">fruits[selection]</code>. To do this in a safe fashion, we have to check if the user-supplied value of <code style="font-family: Monaco;">selection</code> is in the valid range. A more tedious task is the documentation of this option; the program&#39;s user does not know which fruit each number from 0 to 3 is associated with.</p>
-<p><strong>Clparser</strong> offers an alternative, more efficient way to handle situations like this. Instead of handling an integer command line option (accompanied by involved documentation which the user will have frequently to consult), we can handle each array entry as a standalone command-line option, mapping all these options to the same integer <code style="font-family: Monaco;">selection</code>. This approach requires less documentation and is better maintained. The program invocation in the command line will look something like this:</p>
-<pre class="editor-colors lang-bash"><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;prog&nbsp;-orange</span></span></div></pre>
-<p><strong>CmdLineArgs</strong> will take care of the rest. Let&#39;s see it in action (<code style="font-family: Monaco;">example-31.cpp</code>):</p>
-<pre class="editor-colors lang-c++"><div class="line"><span class="syntax--source syntax--cpp"><span>vector</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--c"><span>&lt;</span></span><span>string</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--c"><span>&gt;</span></span><span>&nbsp;fruits&nbsp;</span><span class="syntax--keyword syntax--operator syntax--assignment syntax--c"><span>=</span></span><span>&nbsp;</span><span class="syntax--meta syntax--block syntax--c"><span class="syntax--punctuation syntax--section syntax--block syntax--begin syntax--bracket syntax--curly syntax--c"><span>{</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>apple</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>orange</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>peach</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>melon</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span class="syntax--punctuation syntax--section syntax--block syntax--end syntax--bracket syntax--curly syntax--c"><span>}</span></span></span><span>;</span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--storage syntax--type syntax--c"><span>int</span></span><span>&nbsp;selection&nbsp;</span><span class="syntax--keyword syntax--operator syntax--assignment syntax--c"><span>=</span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>-</span></span><span class="syntax--constant syntax--numeric syntax--c"><span>1</span></span><span>;</span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--storage syntax--type syntax--c"><span>bool</span></span><span>&nbsp;displaySpecs&nbsp;</span><span class="syntax--keyword syntax--operator syntax--assignment syntax--c"><span>=</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--c"><span>false</span></span><span>;</span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--keyword syntax--control syntax--cpp"><span>try</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span class="syntax--punctuation syntax--section syntax--block syntax--begin syntax--bracket syntax--curly syntax--c"><span>{</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;CmdLineArgs</span><span class="syntax--meta syntax--initialization syntax--c"><span>&nbsp;</span><span class="syntax--variable syntax--other syntax--c"><span>cl</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--c"><span>(</span></span></span><span>argc,&nbsp;argv);</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>set_args_doc</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>-[apple|orange|peach|melon]</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>option_help</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>--help</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>display&nbsp;help</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>option</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>-apple</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>apple</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--constant syntax--numeric syntax--c"><span>0</span></span><span>,&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>selection</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>option</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>-orange</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>orange</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--constant syntax--numeric syntax--c"><span>1</span></span><span>,&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>selection</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>option</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>-peach</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>peach</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--constant syntax--numeric syntax--c"><span>2</span></span><span>,&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>selection</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>option</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>-melon</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>melon</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--constant syntax--numeric syntax--c"><span>3</span></span><span>,&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>selection</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>option</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>-display-specs=</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>display&nbsp;specs</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>displaySpecs</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>parse</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>display_messages</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--c"><span>if</span></span><span>&nbsp;</span><span class="syntax--punctuation syntax--section syntax--parens syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span>selection&nbsp;</span><span class="syntax--keyword syntax--operator syntax--comparison syntax--c"><span>==</span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>-</span></span><span class="syntax--constant syntax--numeric syntax--c"><span>1</span></span><span class="syntax--punctuation syntax--section syntax--parens syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--cpp"><span>throw</span></span><span class="syntax--meta syntax--initialization syntax--c"><span>&nbsp;</span><span class="syntax--variable syntax--other syntax--c"><span>string</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--c"><span>(</span></span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>One&nbsp;of&nbsp;-apple&nbsp;-orange&nbsp;-peach&nbsp;-melon&nbsp;</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>must&nbsp;be&nbsp;selected</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>);</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--c"><span>if</span></span><span>&nbsp;</span><span class="syntax--punctuation syntax--section syntax--parens syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span>displaySpecs</span><span class="syntax--punctuation syntax--section syntax--parens syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;</span><span class="syntax--punctuation syntax--section syntax--block syntax--begin syntax--bracket syntax--curly syntax--c"><span>{</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;&nbsp;&nbsp;cout&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;endl&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>Command&nbsp;line&nbsp;specifications:</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;endl;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>display_specs</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;</span><span class="syntax--punctuation syntax--section syntax--block syntax--end syntax--bracket syntax--curly syntax--c"><span>}</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span class="syntax--punctuation syntax--section syntax--block syntax--end syntax--bracket syntax--curly syntax--c"><span>}</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--keyword syntax--control syntax--cpp"><span>catch</span></span><span>&nbsp;</span><span class="syntax--punctuation syntax--section syntax--parens syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span>string</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>&nbsp;error_msg</span><span class="syntax--punctuation syntax--section syntax--parens syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span class="syntax--punctuation syntax--section syntax--block syntax--begin syntax--bracket syntax--curly syntax--c"><span>{</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cout&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>error:&nbsp;</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;error_msg&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;endl;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--c"><span>return</span></span><span>&nbsp;</span><span class="syntax--constant syntax--numeric syntax--c"><span>1</span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span class="syntax--punctuation syntax--section syntax--block syntax--end syntax--bracket syntax--curly syntax--c"><span>}</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span>cout&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;endl&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>Selected&nbsp;fruit:&nbsp;</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;fruits[selection]&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;endl;</span></span></div></pre>
-<p>The first line declares a list of objects, and <code style="font-family: Monaco;">selection</code> in the following line is an object selector. The default value <code style="font-family: Monaco;">-1</code> denotes that nothing has been selected. We handle this condition by throwing an error message. One could give <code style="font-family: Monaco;">selection</code> a valid default value, and, of course, throw no error message if the user does not select anything in the command line.</p>
-<p>In the next line we declare a boolean, which controls the display of command-line specifications. The next three lines are clear. The method <strong>set_args_doc()</strong> tells the parser how to format help (see program output below). In the next line we take advantage of <strong>option_help()</strong>-method&#39;s automated support for command line help, replacing the manually coding of the previous examples. The first argument to <code style="font-family: Monaco;">option_help()</code> is the command-line argument, and the second the information displayed when help is requested by the user.</p>
-<p>The next four statements declare the items of our <code style="font-family: Monaco;">fruits</code> list, which are selectable by the user (in our case all). The first argument is the option&#39;s name, as it appears in the command line; the second is its documentation; the third is the index of the selected object in the list; and finally the last argument is a pointer to the <code style="font-family: Monaco;">int</code> that will receive the user&#39;s selection.</p>
-<p>If we run the program with the options <code style="font-family: Monaco;">example-31 -orange -display-specs=on</code> we obtain:</p>
-<pre class="editor-colors lang-bash"><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;Command&nbsp;line&nbsp;specifications:</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;orange&nbsp;</span><span class="syntax--meta syntax--scope syntax--logical-expression syntax--shell"><span class="syntax--punctuation syntax--definition syntax--logical-expression syntax--shell"><span>[</span></span><span>1</span><span class="syntax--punctuation syntax--definition syntax--logical-expression syntax--shell"><span>]</span></span></span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;display&nbsp;specs:&nbsp;</span><span class="syntax--support syntax--function syntax--builtin syntax--shell"><span>true</span></span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;Selected&nbsp;fruit:&nbsp;orange</span></span></div></pre>
-<p>Of course, the user can specify only one of the options <code style="font-family: Monaco;">-apple</code>, <code style="font-family: Monaco;">-orange</code>, <code style="font-family: Monaco;">-peach</code>, <code style="font-family: Monaco;">-melon</code> on the command line. If more than one of these options are specified, a warning message will be displayed. For example <code style="font-family: Monaco;">example-31 -apple -peach -display-specs=on</code> produces</p>
-<pre class="editor-colors lang-bash"><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;Option&nbsp;</span><span class="syntax--string syntax--quoted syntax--single syntax--shell"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--shell"><span>&#39;</span></span><span>-peach</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--shell"><span>&#39;</span></span></span><span>&nbsp;conflicts&nbsp;with&nbsp;previous&nbsp;options.&nbsp;This&nbsp;option&nbsp;was&nbsp;ignored.</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;Command&nbsp;line&nbsp;specifications:</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;apple&nbsp;</span><span class="syntax--meta syntax--scope syntax--logical-expression syntax--shell"><span class="syntax--punctuation syntax--definition syntax--logical-expression syntax--shell"><span>[</span></span><span>0</span><span class="syntax--punctuation syntax--definition syntax--logical-expression syntax--shell"><span>]</span></span></span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;display&nbsp;specs:&nbsp;</span><span class="syntax--support syntax--function syntax--builtin syntax--shell"><span>true</span></span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;Selected&nbsp;fruit:&nbsp;apple</span></span></div></pre>
+
+
+<h4>3.1 Selections</h4>
+
+<p>Assume we have a string array,</p>
+
+<pre><code class="c++">const char* fruits[] {"apple", "orange", "peach", "melon"};
+</code></pre>
+
+<p>and we&rsquo;d like to let the user select an entry of this array. We can implement this by declaring an integer <code>selection</code> so that the selected entry will be <code>fruits[selection]</code>. To do this safely, we must check if the user-supplied value of <code>selection</code> is in the expected range. A more tedious task is to document this option; the program&rsquo;s user does not know which fruit each number from 0 to 3 is associated with.</p>
+
+<p><strong>Clparser</strong> offers an alternative, more efficient way to handle situations like this. Instead of using an integer command-line option (which implies involved documentation frequently consulted by the user), we can treat each array entry as a standalone command-line option, mapping all these options to the same integer <code>selection</code>. This approach requires less documentation and is better maintained. The program invocation will look something like this:</p>
+
+<pre><code class="bash">$ prog -orange
+</code></pre>
+
+<p><strong>CmdLineArgs</strong> will take care of the rest. Let&rsquo;s see it in action (<code>example-31.cpp</code>):</p>
+
+<pre><code class="c++">vector&lt;string&gt; fruits = {"apple", "orange", "peach", "melon"};
+int selection = -1;
+bool displaySpecs = false;
+try {
+  CmdLineArgs cl(argc, argv);
+  cl.set_args_doc("-[apple|orange|peach|melon]");
+  cl.option_help("--help", "display help");
+  cl.option("-apple", "apple", 0, &amp;selection);
+  cl.option("-orange", "orange", 1, &amp;selection);
+  cl.option("-peach", "peach", 2, &amp;selection);
+  cl.option("-melon", "melon", 3, &amp;selection);
+  cl.option("-display-specs=", "display specs", &amp;displaySpecs);
+  cl.parse();
+  cl.display_messages();
+  if (selection == -1)
+    throw string("One of -apple -orange -peach -melon "
+                 "must be selected");
+  if (displaySpecs) {
+    cout &lt;&lt; endl &lt;&lt; "Command line specifications:" &lt;&lt; endl;
+    cl.display_specs();
+  }
+}
+catch (const string&amp; error_msg) {
+  cout &lt;&lt; "error: " &lt;&lt; error_msg &lt;&lt; endl;
+  return 1;
+}
+cout &lt;&lt; endl &lt;&lt; "Selected fruit: " &lt;&lt; fruits[selection] &lt;&lt; endl;
+</code></pre>
+
+<p>The first line declares a list of objects, and <code>selection</code> in the following line is an object selector. The default value <code>-1</code> denotes that nothing has been selected. We handle this condition by throwing an error message. One could give <code>selection</code> a valid default value and throw no error message if the user does not select anything at the command line.</p>
+
+<p>In the following line we declare a boolean to control the display of command-line specifications. The three lines that follow are clear. The method <strong>set_args_doc()</strong> tells the parser how to format help (see program output below). In the line below them we take advantage of <strong>option_help()</strong>-method&rsquo;s automated support for command line help, replacing the manual coding of the previous examples. The first argument to <code>option_help()</code> is the command-line argument, and the second is the help information.</p>
+
+<p>The following four statements declare the items of our <code>fruits</code> list, which are selectable by the user (in our case: all). The first argument is the option&rsquo;s name as it appears in the command line; the second is its documentation; the third is the index of the selected object in the list; and finally, the last argument is a pointer to the <code>int</code> that will receive the user&rsquo;s selection.</p>
+
+<p>If we run the program with the options <code>example-31 -orange -display-specs=on</code>, we&rsquo;ll get:</p>
+
+<pre><code class="bash">$ Command line specifications:
+$ orange [1]
+$ display specs: true
+$
+$ Selected fruit: orange
+</code></pre>
+
+<p>The user can specify only one of the options <code>-apple</code>, <code>-orange</code>, <code>-peach</code>, and <code>-melon</code> on the command line. If more options are specified, a warning message will be displayed. For example <code>example-31 -apple -peach -display-specs=on</code> produces</p>
+
+<pre><code class="bash">$ Option '-peach' conflicts with previous options. This option was ignored.
+$
+$ Command line specifications:
+$ apple [0]
+$ display specs: true
+$
+$ Selected fruit: apple
+</code></pre>
+
 <p>To make this warning a fatal error we use the <strong>CmdLineArgs::set_conflict_fatal()</strong> method:</p>
-<pre class="editor-colors lang-c++"><div class="line"><span class="syntax--source syntax--cpp"><span>&nbsp;&nbsp;cl.</span><span class="syntax--meta syntax--function syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>set_conflict_fatal</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></div></pre>
-<p>The usual placement of this method call is below <strong>CmdLineArgs</strong>&#39;s declaration. In this case the result is:</p>
-<pre class="editor-colors lang-bash"><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;error:&nbsp;Option&nbsp;</span><span class="syntax--string syntax--quoted syntax--single syntax--shell"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--shell"><span>&#39;</span></span><span>-peach</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--shell"><span>&#39;</span></span></span><span>&nbsp;conflicts&nbsp;with&nbsp;previous&nbsp;options.</span></span></div></pre>
-<p>Finally, let us take a look at the output of <code style="font-family: Monaco;">example-13 --help</code>:</p>
-<pre class="editor-colors lang-bash"><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;Usage:&nbsp;example-31&nbsp;</span><span class="syntax--meta syntax--scope syntax--logical-expression syntax--shell"><span class="syntax--punctuation syntax--definition syntax--logical-expression syntax--shell"><span>[</span></span><span>option1&nbsp;option2&nbsp;...</span><span class="syntax--punctuation syntax--definition syntax--logical-expression syntax--shell"><span>]</span></span></span><span>&nbsp;-</span><span class="syntax--meta syntax--scope syntax--logical-expression syntax--shell"><span class="syntax--punctuation syntax--definition syntax--logical-expression syntax--shell"><span>[</span></span><span>apple</span><span class="syntax--keyword syntax--operator syntax--pipe syntax--shell"><span>|</span></span><span>orange</span><span class="syntax--keyword syntax--operator syntax--pipe syntax--shell"><span>|</span></span><span>peach</span><span class="syntax--keyword syntax--operator syntax--pipe syntax--shell"><span>|</span></span><span>melon</span><span class="syntax--punctuation syntax--definition syntax--logical-expression syntax--shell"><span>]</span></span></span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;Available&nbsp;options:</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;--help&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display&nbsp;</span><span class="syntax--support syntax--function syntax--builtin syntax--shell"><span>help</span></span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;-apple&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apple</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;-orange&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;orange</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;-peach&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;peach</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;-melon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;melon</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>$&nbsp;-display-specs=</span><span class="syntax--meta syntax--scope syntax--logical-expression syntax--shell"><span class="syntax--punctuation syntax--definition syntax--logical-expression syntax--shell"><span>[</span></span><span>yes</span><span class="syntax--keyword syntax--operator syntax--pipe syntax--shell"><span>|</span></span><span>no</span><span class="syntax--punctuation syntax--definition syntax--logical-expression syntax--shell"><span>]</span></span></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display&nbsp;specs</span></span></div></pre>
-<h4 id="3-2-mutually-exclusive-options-groups-">3.2 Mutually exclusive options (Groups)</h4>
-<p>There are cases in which the user may select only one option out of a specific subset of options, while other options are freely selectable. Such <em>subsets of mutually exclusive options</em> are called <strong>groups</strong> in the free-style version of <strong>clparser</strong>. They are not to be confused with the groups of the <strong>argp</strong> interface, where groups are used for documentation purposes.
-We have already seen a particular type of groups: selections. In general, to specify a group of options, we declare the first option of the group as usual with one of the <strong>CmdLineArgs::option()</strong> methods, and all other options of the group with a <strong>CmdLineArgs::group()</strong> method. Assume, for example, that we&#39;d like to have a boolean option <code style="font-family: Monaco;">--option=</code> for our program, but we&#39;d like to also have a shortcut version <code style="font-family: Monaco;">-o=</code> available, and additionally, a no-arguments version of the same option, <code style="font-family: Monaco;">-o</code>, which just turns on the features associated with this option. We end-up with three options doing about the same thing. To avoid usage errors we decide to restrict the user&#39;s access to these three options so that only one of the three options is selectable at the command line. Here is how we do this (<code style="font-family: Monaco;">example-32.cpp</code>):</p>
-<pre class="editor-colors lang-c++"><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--storage syntax--type syntax--c"><span>bool</span></span><span>&nbsp;opt&nbsp;</span><span class="syntax--keyword syntax--operator syntax--assignment syntax--c"><span>=</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--c"><span>false</span></span><span>;</span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--storage syntax--type syntax--c"><span>bool</span></span><span>&nbsp;displaySpecs&nbsp;</span><span class="syntax--keyword syntax--operator syntax--assignment syntax--c"><span>=</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--c"><span>false</span></span><span>;</span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--keyword syntax--control syntax--cpp"><span>try</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span class="syntax--punctuation syntax--section syntax--block syntax--begin syntax--bracket syntax--curly syntax--c"><span>{</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;CmdLineArgs</span><span class="syntax--meta syntax--initialization syntax--c"><span>&nbsp;</span><span class="syntax--variable syntax--other syntax--c"><span>cl</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--c"><span>(</span></span></span><span>argc,&nbsp;argv);</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>set_conflict_fatal</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>option_help</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>--help</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>display&nbsp;help</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>option</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>-o</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>enable&nbsp;option</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>opt</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>group</span></span><span>&nbsp;</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>-o=</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>enable/disable&nbsp;option</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>opt</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>group</span></span><span>&nbsp;</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>--option=</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>enable/disable&nbsp;option</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>opt</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>option</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>--display-specs</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>display&nbsp;specs</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>displaySpecs</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>parse</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>display_messages</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--c"><span>if</span></span><span>&nbsp;</span><span class="syntax--punctuation syntax--section syntax--parens syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span>displaySpecs</span><span class="syntax--punctuation syntax--section syntax--parens syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;</span><span class="syntax--punctuation syntax--section syntax--block syntax--begin syntax--bracket syntax--curly syntax--c"><span>{</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;&nbsp;&nbsp;cout&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;endl&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>Command&nbsp;line&nbsp;specifications:</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;endl;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>display_specs</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;</span><span class="syntax--punctuation syntax--section syntax--block syntax--end syntax--bracket syntax--curly syntax--c"><span>}</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span class="syntax--punctuation syntax--section syntax--block syntax--end syntax--bracket syntax--curly syntax--c"><span>}</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--keyword syntax--control syntax--cpp"><span>catch</span></span><span>&nbsp;</span><span class="syntax--punctuation syntax--section syntax--parens syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span>string</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>&nbsp;error_msg</span><span class="syntax--punctuation syntax--section syntax--parens syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span class="syntax--punctuation syntax--section syntax--block syntax--begin syntax--bracket syntax--curly syntax--c"><span>{</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cout&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>error:&nbsp;</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;error_msg&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;endl;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--c"><span>return</span></span><span>&nbsp;</span><span class="syntax--constant syntax--numeric syntax--c"><span>1</span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span class="syntax--punctuation syntax--section syntax--block syntax--end syntax--bracket syntax--curly syntax--c"><span>}</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span>cout&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;endl;</span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span>cout&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>option:&nbsp;</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;</span><span class="syntax--meta syntax--function syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>string</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span>opt&nbsp;</span><span class="syntax--keyword syntax--operator syntax--ternary syntax--c"><span>?</span></span><span>&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--c"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--c"><span>&quot;</span></span><span>en</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--c"><span>&quot;</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--ternary syntax--c"><span>:</span></span><span>&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>dis</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>+</span></span><span>&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>abled</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;endl;</span></span></div></pre>
-<p>If we run the program with the arguments <code style="font-family: Monaco;">-o --option=on</code> we obtain the following output:</p>
-<pre class="editor-colors lang-bash"><div class="line"><span class="syntax--source syntax--shell"><span>Option&nbsp;</span><span class="syntax--string syntax--quoted syntax--single syntax--shell"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--shell"><span>&#39;</span></span><span>--option=on</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--shell"><span>&#39;</span></span></span><span>&nbsp;conflicts&nbsp;with&nbsp;previous&nbsp;options.&nbsp;This&nbsp;option&nbsp;was&nbsp;ignored.</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>&nbsp;</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>option:&nbsp;enabled</span></span></div></pre>
-<p>As usually, we insert the statement <code style="font-family: Monaco;">cl.set_conflict_fatal();</code> below <code style="font-family: Monaco;">cl</code>&#39;s declaration to make option conflicts fatal. In this case we obtain:</p>
-<pre class="editor-colors lang-bash"><div class="line"><span class="syntax--source syntax--shell"><span>error:&nbsp;Option&nbsp;</span><span class="syntax--string syntax--quoted syntax--single syntax--shell"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--shell"><span>&#39;</span></span><span>--option=on</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--shell"><span>&#39;</span></span></span><span>&nbsp;conflicts&nbsp;with&nbsp;previous&nbsp;options.</span></span></div></pre>
+
+<pre><code class="c++">  cl.set_conflict_fatal();
+</code></pre>
+
+<p>The usual placement of this method call is below <strong>CmdLineArgs</strong>&rsquo;s declaration. In this case the result is:</p>
+
+<pre><code class="bash">$ error: Option '-peach' conflicts with previous options.
+</code></pre>
+
+<p>Finally, let us take a look at the output of <code>example-13 --help</code>:</p>
+
+<pre><code class="bash">$ Usage: example-31 [option1 option2 ...] -[apple|orange|peach|melon]
+$
+$ Available options:
+$ --help                        display help
+$ -apple                        apple
+$ -orange                       orange
+$ -peach                        peach
+$ -melon                        melon
+$ -display-specs=[yes|no]       display specs
+</code></pre>
+
+<h4>3.2 Mutually exclusive options (Groups)</h4>
+
+<p>Often the user may select only one out of a specific subset of options, while other options are freely selectable. Such <em>subsets of mutually exclusive options</em> are called <strong>groups</strong> in the free-style version of <strong>clparser</strong>. They are not to be confused with the groups of the <strong>argp</strong> interface; <strong>argp</strong> uses groups for documentation purposes only.
+We have already seen a particular type of group: <em>selections</em>. In general, to specify a group of options, we declare the first option of the group as usual with one of the <strong>CmdLineArgs::option</strong> methods and all other options of the group with a <strong>CmdLineArgs::group</strong> method. Assume we&rsquo;d like to have a boolean option <code>--option=</code> for our program along with a shortcut version <code>-o=</code>, and additionally a no-arguments version of the same option, <code>-o</code>, whose task is to turn on and off the features associated with that option. The outcome is three options that do the same job. To avoid usage errors, we decide to restrict the user&rsquo;s access to these three options so that only one of the three options is selectable at the command line. Here is how to do that (<code>example-32.cpp</code>):</p>
+
+<pre><code class="c++">bool opt = false;
+bool displaySpecs = false;
+try {
+  CmdLineArgs cl(argc, argv);
+  cl.set_conflict_fatal();
+  cl.option_help("--help", "display help");
+  cl.option("-o", "enable option", &amp;opt);
+  cl.group ("-o=", "enable/disable option", &amp;opt);
+  cl.group ("--option=", "enable/disable option", &amp;opt);
+  cl.option("--display-specs", "display specs", &amp;displaySpecs);
+  cl.parse();
+  cl.display_messages();
+  if (displaySpecs) {
+    cout &lt;&lt; endl &lt;&lt; "Command line specifications:" &lt;&lt; endl;
+    cl.display_specs();
+  }
+}
+catch (const string&amp; error_msg) {
+  cout &lt;&lt; "error: " &lt;&lt; error_msg &lt;&lt; endl;
+  return 1;
+}
+cout &lt;&lt; endl;
+cout &lt;&lt; "option: " &lt;&lt; string(opt ? "en" : "dis") + "abled" &lt;&lt; endl;
+</code></pre>
+
+<p>If we run the program with the arguments <code>-o --option=on</code> we get the following output:</p>
+
+<pre><code class="bash">Option '--option=on' conflicts with previous options. This option was ignored.
+
+option: enabled
+</code></pre>
+
+<p>As usually, we insert the statement <code>cl.set_conflict_fatal();</code> below <code>cl</code>&rsquo;s declaration to make option conflicts fatal. In this case we get the following message:</p>
+
+<pre><code class="bash">error: Option '--option=on' conflicts with previous options.
+</code></pre>
+
 <p>There is no difference if we use <strong>groups</strong> instead of <strong>options</strong> to handle selections. For example if we write</p>
-<pre class="editor-colors lang-c++"><div class="line"><span class="syntax--source syntax--cpp"><span>cl.</span><span class="syntax--meta syntax--function syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>option</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>-apple</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>apple</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--constant syntax--numeric syntax--c"><span>0</span></span><span>,&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>selection</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span>cl.</span><span class="syntax--meta syntax--function syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>group</span></span><span>&nbsp;</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>-orange</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>orange</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--constant syntax--numeric syntax--c"><span>1</span></span><span>,&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>selection</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span>cl.</span><span class="syntax--meta syntax--function syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>group</span></span><span>&nbsp;</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>-peach</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>peach</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--constant syntax--numeric syntax--c"><span>2</span></span><span>,&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>selection</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span>cl.</span><span class="syntax--meta syntax--function syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>group</span></span><span>&nbsp;</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>-melon</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>melon</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--constant syntax--numeric syntax--c"><span>3</span></span><span>,&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>selection</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></div></pre>
-<p>in <code style="font-family: Monaco;">example-31</code> leaving all other statements unchanged, the result will be the same (<code style="font-family: Monaco;">example-32a.cpp</code>).</p>
-<h4 id="3-3-aliases">3.3 Aliases</h4>
-<p>In all examples we used the option <code style="font-family: Monaco;">--help</code> to display program&#39;s usage information. However, the options <code style="font-family: Monaco;">-r</code> and <code style="font-family: Monaco;">-?</code> are commonly used for the same purpose. To declare several options producing the same effect we use <strong>aliases</strong>. To declare an option along with a number of aliases declare the option as usually, and then use the method <strong>CmdLineArgs::alias()</strong> to declare the aliases. For example, to add multiple <em>help</em> options use <strong>CmdLineArgs::option_help()</strong>, which is essentially equivalent to an <code style="font-family: Monaco;">option()</code> invocation, and then use <strong>alias</strong>, as in the following code snippet (<code style="font-family: Monaco;">example-33.cpp</code>):</p>
-<pre class="editor-colors lang-c++"><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--storage syntax--type syntax--c"><span>bool</span></span><span>&nbsp;opt&nbsp;</span><span class="syntax--keyword syntax--operator syntax--assignment syntax--c"><span>=</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--c"><span>false</span></span><span>;</span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--storage syntax--type syntax--c"><span>bool</span></span><span>&nbsp;displaySpecs&nbsp;</span><span class="syntax--keyword syntax--operator syntax--assignment syntax--c"><span>=</span></span><span>&nbsp;</span><span class="syntax--constant syntax--language syntax--c"><span>false</span></span><span>;</span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--keyword syntax--control syntax--cpp"><span>try</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span class="syntax--punctuation syntax--section syntax--block syntax--begin syntax--bracket syntax--curly syntax--c"><span>{</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;CmdLineArgs</span><span class="syntax--meta syntax--initialization syntax--c"><span>&nbsp;</span><span class="syntax--variable syntax--other syntax--c"><span>cl</span></span><span class="syntax--punctuation syntax--definition syntax--parameters syntax--c"><span>(</span></span></span><span>argc,&nbsp;argv);</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>option_help</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>--help</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>display&nbsp;help</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>alias</span></span><span>&nbsp;</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>-h</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>alias</span></span><span>&nbsp;</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>-?</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>option</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>-o</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>enable&nbsp;option</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>opt</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>group</span></span><span>&nbsp;</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>-o=</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>enable/disable&nbsp;option</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>opt</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>group</span></span><span>&nbsp;</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>--option=</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>enable/disable&nbsp;option</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>opt</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>option</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>-display-specs</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>display&nbsp;specs</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>,&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>displaySpecs</span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>parse</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>display_messages</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--c"><span>if</span></span><span>&nbsp;</span><span class="syntax--punctuation syntax--section syntax--parens syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span>displaySpecs</span><span class="syntax--punctuation syntax--section syntax--parens syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;</span><span class="syntax--punctuation syntax--section syntax--block syntax--begin syntax--bracket syntax--curly syntax--c"><span>{</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;&nbsp;&nbsp;cout&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;endl&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>Command&nbsp;line&nbsp;specifications:</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;endl;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;&nbsp;&nbsp;cl</span><span class="syntax--punctuation syntax--separator syntax--dot-access syntax--c"><span>.</span></span><span class="syntax--meta syntax--function-call syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>display_specs</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;</span><span class="syntax--punctuation syntax--section syntax--block syntax--end syntax--bracket syntax--curly syntax--c"><span>}</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span class="syntax--punctuation syntax--section syntax--block syntax--end syntax--bracket syntax--curly syntax--c"><span>}</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--keyword syntax--control syntax--cpp"><span>catch</span></span><span>&nbsp;</span><span class="syntax--punctuation syntax--section syntax--parens syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span>string</span><span class="syntax--keyword syntax--operator syntax--c"><span>&amp;</span></span><span>&nbsp;error_msg</span><span class="syntax--punctuation syntax--section syntax--parens syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span class="syntax--punctuation syntax--section syntax--block syntax--begin syntax--bracket syntax--curly syntax--c"><span>{</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;cout&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>error:&nbsp;</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;error_msg&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;endl;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span>&nbsp;&nbsp;</span><span class="syntax--keyword syntax--control syntax--c"><span>return</span></span><span>&nbsp;</span><span class="syntax--constant syntax--numeric syntax--c"><span>1</span></span><span>;</span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span class="syntax--meta syntax--block syntax--c"><span class="syntax--punctuation syntax--section syntax--block syntax--end syntax--bracket syntax--curly syntax--c"><span>}</span></span></span></span></div><div class="line"><span class="syntax--source syntax--cpp"><span>cout&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>option:&nbsp;</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;</span><span class="syntax--meta syntax--function syntax--c"><span class="syntax--entity syntax--name syntax--function syntax--c"><span>string</span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--begin syntax--bracket syntax--round syntax--c"><span>(</span></span><span>opt&nbsp;</span><span class="syntax--keyword syntax--operator syntax--ternary syntax--c"><span>?</span></span><span>&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--c"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--c"><span>&quot;</span></span><span>en</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--c"><span>&quot;</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--ternary syntax--c"><span>:</span></span><span>&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>dis</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span class="syntax--punctuation syntax--section syntax--arguments syntax--end syntax--bracket syntax--round syntax--c"><span>)</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--c"><span>+</span></span><span>&nbsp;</span><span class="syntax--string syntax--quoted syntax--double syntax--cpp"><span class="syntax--punctuation syntax--definition syntax--string syntax--begin syntax--cpp"><span>&quot;</span></span><span>abled</span><span class="syntax--punctuation syntax--definition syntax--string syntax--end syntax--cpp"><span>&quot;</span></span></span><span>&nbsp;</span><span class="syntax--keyword syntax--operator syntax--bitwise syntax--shift syntax--c"><span>&lt;&lt;</span></span><span>&nbsp;endl;</span></span></div></pre>
-<p>Any one of the options <code style="font-family: Monaco;">--help</code>, <code style="font-family: Monaco;">-h</code> or <code style="font-family: Monaco;">-?</code> produces the output:</p>
-<pre class="editor-colors lang-bash"><div class="line"><span class="syntax--source syntax--shell"><span>Usage:&nbsp;example-33&nbsp;</span><span class="syntax--meta syntax--scope syntax--logical-expression syntax--shell"><span class="syntax--punctuation syntax--definition syntax--logical-expression syntax--shell"><span>[</span></span><span>option1&nbsp;option2&nbsp;...</span><span class="syntax--punctuation syntax--definition syntax--logical-expression syntax--shell"><span>]</span></span></span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>&nbsp;</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>Available&nbsp;options:</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>--help&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display&nbsp;</span><span class="syntax--support syntax--function syntax--builtin syntax--shell"><span>help</span></span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>-h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display&nbsp;</span><span class="syntax--support syntax--function syntax--builtin syntax--shell"><span>help</span></span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>-</span><span class="syntax--keyword syntax--operator syntax--glob syntax--shell"><span>?</span></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display&nbsp;</span><span class="syntax--support syntax--function syntax--builtin syntax--shell"><span>help</span></span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>-o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="syntax--support syntax--function syntax--builtin syntax--shell"><span>enable</span></span><span>&nbsp;option</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>-o=</span><span class="syntax--meta syntax--scope syntax--logical-expression syntax--shell"><span class="syntax--punctuation syntax--definition syntax--logical-expression syntax--shell"><span>[</span></span><span>yes</span><span class="syntax--keyword syntax--operator syntax--pipe syntax--shell"><span>|</span></span><span>no</span><span class="syntax--punctuation syntax--definition syntax--logical-expression syntax--shell"><span>]</span></span></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enable/disable&nbsp;option</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>--option=</span><span class="syntax--meta syntax--scope syntax--logical-expression syntax--shell"><span class="syntax--punctuation syntax--definition syntax--logical-expression syntax--shell"><span>[</span></span><span>yes</span><span class="syntax--keyword syntax--operator syntax--pipe syntax--shell"><span>|</span></span><span>no</span><span class="syntax--punctuation syntax--definition syntax--logical-expression syntax--shell"><span>]</span></span></span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enable/disable&nbsp;option</span></span></div><div class="line"><span class="syntax--source syntax--shell"><span>-display-specs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;display&nbsp;specs</span></span></div></pre>
-<p>[ <a href="tutorial-2.html" title="Displaying Reports and Executing Commands">Prev &lt;</a> ] [ <a href="tutorial-4.html" title="Sources and Data Validation">Next &gt;</a> ] [ <a href="tutorial.html" title="Table of Contents">Up</a> ]</p></body>
+
+<pre><code class="c++">cl.option("-apple", "apple", 0, &amp;selection);
+cl.group ("-orange", "orange", 1, &amp;selection);
+cl.group ("-peach", "peach", 2, &amp;selection);
+cl.group ("-melon", "melon", 3, &amp;selection);
+</code></pre>
+
+<p>in <code>example-31</code> leaving all other statements unchanged, the result will be the same (<code>example-32a.cpp</code>).</p>
+
+<h4>3.3 Aliases</h4>
+
+<p>In the above examples, we used the option <code>--help</code> to display the program&rsquo;s usage information. However, the options <code>-r</code> and <code>-?</code> are commonly used for the same purpose. To declare several options producing the same effect, we use <strong>aliases</strong>. To declare an option along with some aliases, declare the option as usual, and then use the method <strong>CmdLineArgs::alias()</strong> to declare the aliases. For example, to add multiple <em>help</em> options use <strong>CmdLineArgs::option_help()</strong>, which is essentially equivalent to an <code>option()</code> invocation, and then use <strong>alias</strong>, as in the following code snippet (<code>example-33.cpp</code>):</p>
+
+<pre><code class="c++">bool opt = false;
+bool displaySpecs = false;
+try {
+  CmdLineArgs cl(argc, argv);
+  cl.option_help("--help", "display help");
+  cl.alias ("-h");
+  cl.alias ("-?");
+  cl.option("-o", "enable option", &amp;opt);
+  cl.group ("-o=", "enable/disable option", &amp;opt);
+  cl.group ("--option=", "enable/disable option", &amp;opt);
+  cl.option("-display-specs", "display specs", &amp;displaySpecs);
+  cl.parse();
+  cl.display_messages();
+  if (displaySpecs) {
+    cout &lt;&lt; endl &lt;&lt; "Command line specifications:" &lt;&lt; endl;
+    cl.display_specs();
+  }
+}
+catch (const string&amp; error_msg) {
+  cout &lt;&lt; "error: " &lt;&lt; error_msg &lt;&lt; endl;
+  return 1;
+}
+cout &lt;&lt; "option: " &lt;&lt; string(opt ? "en" : "dis") + "abled" &lt;&lt; endl;
+</code></pre>
+
+<p>Any one of the options <code>--help</code>, <code>-h</code> or <code>-?</code> produces the output:</p>
+
+<pre><code class="bash">Usage: example-33 [option1 option2 ...]
+
+Available options:
+--help                        display help
+-h                            display help
+-?                            display help
+-o                            enable option
+-o=[yes|no]                   enable/disable option
+--option=[yes|no]             enable/disable option
+-display-specs                display specs
+</code></pre>
+
+<p>[ <a href="tutorial-2.html" title="Displaying Reports and Executing Commands">Prev &lt;</a> ] [ <a href="tutorial-4.html" title="Sources and Data Validation">Next ></a> ] [ <a href="tutorial.html" title="Table of Contents">Up</a> ]</p>
+</body>
 </html>
