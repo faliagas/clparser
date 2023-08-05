@@ -5,20 +5,17 @@ using std::cout;
 using std::endl;
 using std::string;
 
-int main(int argc, char *argv[])
-{
-	int num = 1;
-	try
-	{
+int main(int argc, char *argv[]) {
+  int num = 1;
+  try {
     CmdLineArgs cl(argc, argv);
     cl.option("num", "number of objects", &num, 'n');
     cl.parse();
   }
-  catch (string& error_msg)
-  {
+  catch (string& error_msg) {
     cout << "error: " << error_msg << endl;
     return 1;
   }
-	cout << "num = " << num << endl;
+  cout << "num = " << num << endl;
   return 0;
 }

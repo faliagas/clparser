@@ -6,15 +6,13 @@ using std::endl;
 using std::string;
 using std::vector;
 
-int main(int argc, char *argv[])
-{
-	int num1 = 1, num2 = 2, num3 = 3;
-	int int1 = 1, int2 = 2, int3 = 3;
-	double fp1 = 0., fp2 = 0., fp3 = 0.;
-	string str1("group 1"), str2("group 2"), str3("group 3");
-	vector<string> sources;
-	try
-	{
+int main(int argc, char *argv[]) {
+  int num1 = 1, num2 = 2, num3 = 3;
+  int int1 = 1, int2 = 2, int3 = 3;
+  double fp1 = 0., fp2 = 0., fp3 = 0.;
+  string str1("group 1"), str2("group 2"), str3("group 3");
+  vector<string> sources;
+  try {
     CmdLineArgs cl(argc, argv);
     cl.set_doc("Clparser argp example 9.3 -- Help groups.");
     cl.begin_group("Group 1:");
@@ -35,28 +33,27 @@ int main(int argc, char *argv[])
     cl.parse();
     sources = cl.sources();
   }
-  catch (string& error_msg)
-  {
+  catch (const string& error_msg) {
     cout << "error: " << error_msg << endl;
     return 1;
   }
-	cout << "num1 = " << num1 << endl;
-	cout << "int1 = " << int1 << endl;
-	cout << "fp1  = " << fp1  << endl;
-	cout << "str1 = " << str1 << endl;
-	cout << "num2 = " << num2 << endl;
-	cout << "int2 = " << int2 << endl;
-	cout << "fp2  = " << fp2  << endl;
-	cout << "str2 = " << str2 << endl;
-	cout << "num3 = " << num3 << endl;
-	cout << "int3 = " << int3 << endl;
-	cout << "fp3  = " << fp3  << endl;
-	cout << "str3 = " << str3 << endl;
-	if (sources.size() != 0)
+  cout << "num1 = " << num1 << endl;
+  cout << "int1 = " << int1 << endl;
+  cout << "fp1  = " << fp1  << endl;
+  cout << "str1 = " << str1 << endl;
+  cout << "num2 = " << num2 << endl;
+  cout << "int2 = " << int2 << endl;
+  cout << "fp2  = " << fp2  << endl;
+  cout << "str2 = " << str2 << endl;
+  cout << "num3 = " << num3 << endl;
+  cout << "int3 = " << int3 << endl;
+  cout << "fp3  = " << fp3  << endl;
+  cout << "str3 = " << str3 << endl;
+  if (sources.size() != 0)
     cout << "sources:" << endl;
-	for (auto source: sources)
+  for (auto source: sources)
     cout << source << " ";
-	if (sources.size() != 0)
+  if (sources.size() != 0)
     cout << endl;
   return 0;
 }

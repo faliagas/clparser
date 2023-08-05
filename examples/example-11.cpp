@@ -23,13 +23,12 @@
 using std::cout;
 using std::endl;
 
-int main(int argc, char *argv[])
-{
-	int num = 1;
-	CmdLineArgs cl(argc, argv);
-	cl.option("-num=", "number of objects", &num);
-	cl.parse();
-	cout << "num = " << num << endl;
+int main(int argc, char *argv[]) {
+  int num = 1;
+  CmdLineArgs cl(argc, argv);
+  cl.option("-num=", "number of objects", &num);
+  cl.parse();
+  cout << "num = " << num << endl;
 
   return 0;
 }

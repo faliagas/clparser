@@ -36,26 +36,23 @@ using std::cout; using std::endl; using std::string; using std::vector;
 
 string btos(bool b) {return string(b ? "yes" : "no");}
 
-int main (int argc, char **argv)
-{
-
+int main (int argc, char **argv) {
   string arg1;
   string output_file("-");
   vector<string> strings;
   bool silent = false, verbose = false, abort = false;
   int repeat_count = 1;
 
-  try
-  {
+  try {
     CmdLineArgs cl(argc, argv);
     // Program documentation
     cl.set_doc(
-"Argp example #4 -- a program with somewhat more complicated options\
-\v\
-This part of the documentation comes *after* the options; \
+"Argp example #4 -- a program with somewhat more complicated options");
+    cl.set_args_doc("ARG1 [STRING...]");
+    cl.set_footer(
+"This part of the documentation comes *after* the options; \
 note that the text is automatically filled, but it's possible \
 to force a line-break, e.g.\n<-- here.");
-    cl.set_args_doc("ARG1 [STRING...]");
     cl.option("verbose", "Produce verbose output",   &verbose, 'v');
     cl.option("quiet",   "Don't produce any output", &silent,  'q');
     cl.alias ("silent", 's');
@@ -69,8 +66,7 @@ to force a line-break, e.g.\n<-- here.");
     cl.parse();
     if (abort)
       error (10, 0, "ABORTED");
-    if (cl.sources().size() < 1)
-    {
+    if (cl.sources().size() < 1) {
       cl.display_usage();
       return 3;
     }
@@ -79,14 +75,12 @@ to force a line-break, e.g.\n<-- here.");
     for (int i = 1; i < sources.size(); ++i)
       strings.push_back(sources[i]);
   }
-  catch (std::string& msg)
-  {
+  catch (const std::string& msg) {
     cout << "error: " << msg << endl;
     return 3;
   }
 
-  for (int i = 0; i < repeat_count; ++i)
-  {
+  for (int i = 0; i < repeat_count; ++i) {
     cout << "ARG1 = " << arg1 << endl
         << "STRINGS = ";
     for (int j = 0; j < strings.size(); ++j)

@@ -46,8 +46,7 @@ static struct argp_option options[] = {
 };
 
 /* Used by main to communicate with parse_opt. */
-struct arguments
-{
+struct arguments {
   char *args[2];                /* arg1 & arg2 */
   int silent, verbose;
   char *output_file;
@@ -55,14 +54,12 @@ struct arguments
 
 /* Parse a single option. */
 static error_t
-parse_opt (int key, char *arg, struct argp_state *state)
-{
+parse_opt (int key, char *arg, struct argp_state *state) {
   /* Get the input argument from argp_parse, which we
      know is a pointer to our arguments structure. */
   struct arguments *arguments = state->input;
 
-  switch (key)
-    {
+  switch (key) {
     case 'q': case 's':
       arguments->silent = 1;
       break;
@@ -90,7 +87,7 @@ parse_opt (int key, char *arg, struct argp_state *state)
 
     default:
       return ARGP_ERR_UNKNOWN;
-    }
+  }
   return 0;
 }
 
@@ -98,8 +95,7 @@ parse_opt (int key, char *arg, struct argp_state *state)
 static struct argp argp = { options, parse_opt, args_doc, doc };
 #endif // 0
 
-int main (int argc, char **argv)
-{
+int main (int argc, char **argv) {
   // These are the variables left to the user's control.
   // No need for struct arguments -- use variables directly with default values.
   char *args[2]; // arg1 & arg2
@@ -107,8 +103,7 @@ int main (int argc, char **argv)
   char *output_file = (char*)"-";
 
   CmdLineArgs cl(argc, argv);
-  try
-  {
+  try {
     // Program documentation
     cl.set_doc("Argp example #3 "
         "-- a program with options and arguments using argp");
@@ -124,16 +119,14 @@ int main (int argc, char **argv)
     // will be reflected in the associated variables.
     cl.parse();
     // The user must supply exactly two arguments
-    if (cl.sources().size() != 2)
-    {
+    if (cl.sources().size() != 2) {
       cl.display_usage();
       return 3;
     }
     args[0] = const_cast<char*>(cl.sources().at(0).c_str());
     args[1] = const_cast<char*>(cl.sources().at(1).c_str());
   }
-  catch (std::string& msg)
-  {
+  catch (std::string& msg) {
     printf("error: %s\n", msg.c_str());
     return 3;
   }

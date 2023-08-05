@@ -5,24 +5,20 @@ using std::cout;
 using std::endl;
 using std::string;
 
-struct Employee
-{
+struct Employee {
   string      name;
   int         age;
   double      salary;
   bool        married;
 };
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   Employee employee = {"noname", 0, 0., false};
-  try
-  {
+  try {
     CmdLineArgs cl(argc, argv);
     cl.option_help("--help", "display help");
     cl.option("-name=", "employee name", [&employee](const char *arg) {
-        if (string(arg).length() > 50)
-        {
+        if (string(arg).length() > 50) {
           cout << "employee name too long" << endl;
           return false; // this causes program termination
         }
@@ -32,13 +28,11 @@ int main(int argc, char *argv[])
     cl.option("-age=", "employee age", [&employee](const char *arg) {
         size_t sz;
         int age = std::stoi(string(arg), &sz);
-        if (sz < string(arg).length())
-        {
+        if (sz < string(arg).length()) {
           cout << "incorrect number for employee age" << endl;
           return false; // this causes program termination
         }
-        if (age < 18 || age > 70)
-        {
+        if (age < 18 || age > 70) {
           cout << "employee age out of range" << endl;
           return false; // this causes program termination
         }
@@ -50,13 +44,11 @@ int main(int argc, char *argv[])
     cl.parse();
     cl.display_messages();
   }
-  catch (std::string& error_msg)
-  {
+  catch (std::string& error_msg) {
     cout << "error: " << error_msg << endl;
     return 1;
   }
-  catch (std::invalid_argument& e)
-  {
+  catch (std::invalid_argument& e) {
     cout << "incorrect number for employee age" << endl;
     return 1;
   }

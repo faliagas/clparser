@@ -4,13 +4,11 @@
 using std::cout; using std::endl;
 using std::string; using std::vector;
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   vector<string> fruits = {"apple", "orange", "peach", "melon"};
   int selection = -1;
   bool displaySpecs = false;
-  try
-  {
+  try {
     CmdLineArgs cl(argc, argv);
     //cl.set_conflict_fatal();
     cl.set_args_doc("-[apple|orange|peach|melon]");
@@ -24,14 +22,12 @@ int main(int argc, char *argv[])
     cl.display_messages();
     if (selection == -1)
       throw string("One of -apple -orange -peach -melon must be selected");
-    if (displaySpecs)
-    {
+    if (displaySpecs) {
       cout << endl << "Command line specifications:" << endl;
       cl.display_specs();
     }
   }
-  catch (std::string& error_msg)
-  {
+  catch (std::string& error_msg) {
     cout << "error: " << error_msg << endl;
     return 1;
   }

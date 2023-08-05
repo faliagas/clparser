@@ -31,14 +31,12 @@ using std::string; using std::vector;
 const char *argp_program_version = "argp-ex3 1.0";
 const char *argp_program_bug_address = "<bug-gnu-utils@gnu.org>";
 
-int main (int argc, char **argv)
-{
+int main (int argc, char **argv) {
   vector<string> args; // arg1 & arg2
   bool silent = false, verbose = false;
   string output_file("-");
 
-  try
-  {
+  try {
     CmdLineArgs cl(argc, argv);
     cl.set_doc("Argp example #3 "
         "-- a program with options and arguments using argp");
@@ -50,15 +48,13 @@ int main (int argc, char **argv)
     cl.option("output",  "Output to $FILE$ instead of standard output",
         &output_file, 'o');
     cl.parse();
-    if (cl.sources().size() != 2)
-    {
+    if (cl.sources().size() != 2) {
       cl.display_usage();
       return 3;
     }
     args = cl.sources();
   }
-  catch (string& msg)
-  {
+  catch (string& msg) {
     printf("error: %s\n", msg.c_str());
     return 3;
   }

@@ -5,13 +5,11 @@ using std::cout;
 using std::endl;
 using std::string;
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   string ver = "1.2.3";
   int num = 0;
 
-  try
-  {
+  try {
     CmdLineArgs cl(argc, argv);
     cl.set_doc("example-22b -- my first program using help.");
     cl.option("--help", "Display help", [&cl](const char*) {
@@ -28,8 +26,7 @@ int main(int argc, char *argv[])
     cout << "Command line specification:" << endl;
     cl.display_specs();
   }
-  catch (string& error_msg)
-  {
+  catch (string& error_msg) {
     cout << "error: " << error_msg << endl;
     return 1;
   }

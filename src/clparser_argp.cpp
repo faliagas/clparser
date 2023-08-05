@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 2; tab-width: 2 -*-  */
 /*
  * clparser_argp.cpp
- * Copyright (C) 2017 Apostol Faliagas <apostol.faliagas@gmail.com>
+ * Copyright (C) 2017-23 Apostol Faliagas <apostol.faliagas@gmail.com>
  *
  * clparser is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -50,7 +50,6 @@ static const argp_option nullopt = NULL_OPTION;
 // Used by CmdLineArgs::::parse_cmd_line() to communicate with parse_opt.
 struct CmdLineArgsData {
   CmdLineArgs *self;
-  ArgpHandler *argp_handler;
 };
 
 static int f_find_argp_option(argp_option *a, int key) {
@@ -60,38 +59,39 @@ static int f_find_argp_option(argp_option *a, int key) {
   return -1;
 }
 
-static error_t f_options_parser(int key, char *arg, argp_state *state) {
+error_t CmdLineArgs::_options_parser(int key, char *arg, argp_state *state) {
   // Get the input argument from argp_parse, which
   // is a pointer to our CmdLineArgsData structure.
   CmdLineArgsData *cml_data = static_cast<CmdLineArgsData*>(state->input);
   CmdLineArgs* _this = cml_data->self;
-  ArgpHandler* argp_handler = cml_data->argp_handler;
+  ArgpHandler& argp_handler = _this->_argpHandler;
   int rc = 0;
   switch (key) {
     case ARGP_KEY_ARG:
-      if (argp_handler == 0 || !argp_handler->on_arg(state, arg, &rc))
+      if (!argp_handler.on_arg || !argp_handler.on_arg(state, arg, &rc))
         _this->sources().push_back(arg);
       return rc;
     case ARGP_KEY_NO_ARGS:  // This is called just before ARGP_KEY_END
-      if (argp_handler != 0) argp_handler->on_args(state, arg, &rc);
+      if (argp_handler.on_args) argp_handler.on_args(state, arg, &rc);
       return rc;
     case ARGP_KEY_INIT:     // This is passed in before any parsing is done
-      if (argp_handler != 0) argp_handler->on_init(state, arg, &rc);
+      if (argp_handler.on_init) argp_handler.on_init(state, arg, &rc);
       return rc;
     case ARGP_KEY_END:
-      if (argp_handler != 0) argp_handler->on_end(state, arg, &rc);
+      if (argp_handler.on_end) argp_handler.on_end(state, arg, &rc);
       return rc;
     case ARGP_KEY_SUCCESS:  // When parsing has successfully been completed
-      if (argp_handler != 0) argp_handler->on_success(state, arg, &rc);
+      if (argp_handler.on_success) argp_handler.on_success(state, arg, &rc);
       return rc;
     case ARGP_KEY_ERROR:    // When an error occurred & parsing is terminated
-      if (argp_handler != 0) argp_handler->on_error(state, arg, &rc);
+      if (argp_handler.on_error) argp_handler.on_error(state, arg, &rc);
       return rc;
     case ARGP_KEY_FINI:     // The final key ever seen by a parser
-      if (argp_handler != 0) argp_handler->on_finished(state, arg, &rc);
+      if (argp_handler.on_finished) argp_handler.on_finished(state, arg, &rc);
       return rc;
     default:
-      return _this->options_parser(key, arg);
+      return (argp_handler.on_key && argp_handler.on_key(key, state, arg, &rc))
+          ? rc : _this->options_parser(key, arg);
   }
   return 0;
 }
@@ -198,10 +198,11 @@ void CmdLineArgs::init(int argc, char *argv[]) {
 // =============================================================================
 // Option definition
 // =============================================================================
-void CmdLineArgs::_set_option_id(CmdLineOption& co, int option_id) {
+int CmdLineArgs::_set_option_id(CmdLineOption& co, int option_id) {
   if (!_initialized)
     throw string{"the method CmdLineArgs::init() must be called first"};
   co.option_id = option_id == -1 ? f_get_default_option_id(this) : option_id;
+  return co.option_id;
 }
 
 void CmdLineArgs::begin_group(const char *header) {
@@ -217,20 +218,18 @@ void CmdLineArgs::begin_group(const char *header) {
   cmdlo.info   = header;
   cmdlo.group  = _curGroup;
   cmdlo.p_int  = 0;
-  add(cmdlo);
+  emplace_back(std::move(cmdlo));
 }
 
 int CmdLineArgs::option(const CmdLineOption& r) {
   _check_parsed();
+  if (!(r.type < CMDL_NUM)) throw string{"invalid option type"};
 
   CmdLineOption cmdlo = r;
-
-  if (!(cmdlo.type < CMDL_NUM)) throw string{"invalid option type"};
-
-  _set_option_id(cmdlo, cmdlo.option_id);
+  const int oid = _set_option_id(cmdlo, cmdlo.option_id);
   cmdlo.group = _curGroup;
-  add(cmdlo);
-  return cmdlo.option_id;
+  emplace_back(std::move(cmdlo));
+  return oid;
 }
 
 int CmdLineArgs::option(const char *option, const char *info,
@@ -239,18 +238,15 @@ int CmdLineArgs::option(const char *option, const char *info,
   if (!fp) throw string{"invalid data for floating point data option"};
 
   CmdLineOption cmdlo;
-
-  _set_option_id(cmdlo, option_id);
+  const int oid = _set_option_id(cmdlo, option_id);
   _check_option(option, cmdlo.option_id);
   cmdlo.type = CMDL_FP;
   cmdlo.option = option;
   cmdlo.info = info;
   cmdlo.group = _curGroup;
   cmdlo.p_fp = fp;
-
-  add(cmdlo);
-
-  return cmdlo.option_id;
+  emplace_back(std::move(cmdlo));
+  return oid;
 }
 
 int CmdLineArgs::option(const char *option, const char *info,
@@ -259,18 +255,15 @@ int CmdLineArgs::option(const char *option, const char *info,
   if (pb == 0) throw string{"invalid data for boolean option"};
 
   CmdLineOption cmdlo;
-
-  _set_option_id(cmdlo, option_id);
+  const int oid = _set_option_id(cmdlo, option_id);
   _check_option(option, cmdlo.option_id);
   cmdlo.type = CMDL_BOOL;
   cmdlo.option = option;
   cmdlo.info = info;
   cmdlo.group = _curGroup;
   cmdlo.p_bool = pb;
-
-  add(cmdlo);
-
-  return cmdlo.option_id;
+  emplace_back(std::move(cmdlo));
+  return oid;
 }
 
 int CmdLineArgs::option(const char *option, const char *info,
@@ -279,18 +272,15 @@ int CmdLineArgs::option(const char *option, const char *info,
   if (pi == 0) throw string{"invalid data for integer option"};
 
   CmdLineOption cmdlo;
-
-  _set_option_id(cmdlo, option_id);
+  const int oid = _set_option_id(cmdlo, option_id);
   _check_option(option, cmdlo.option_id);
   cmdlo.type = CMDL_INT;
   cmdlo.option = option;
   cmdlo.info = info;
   cmdlo.group = _curGroup;
   cmdlo.p_int = pi;
-
-  add(cmdlo);
-
-  return cmdlo.option_id;
+  emplace_back(std::move(cmdlo));
+  return oid;
 }
 
 int CmdLineArgs::option(const char *option, const char *info,
@@ -299,18 +289,15 @@ int CmdLineArgs::option(const char *option, const char *info,
   if (pstr == 0) throw string{"invalid data for string option"};
 
   CmdLineOption cmdlo;
-
-  _set_option_id(cmdlo, option_id);
+  const int oid = _set_option_id(cmdlo, option_id);
   _check_option(option, cmdlo.option_id);
   cmdlo.type = CMDL_STR;
   cmdlo.option = option;
   cmdlo.info = info;
   cmdlo.group = _curGroup;
   cmdlo.p_const_str = pstr;
-
-  add(cmdlo);
-
-  return cmdlo.option_id;
+  emplace_back(std::move(cmdlo));
+  return oid;
 }
 
 int CmdLineArgs::option(const char *option, const char *info,
@@ -319,17 +306,15 @@ int CmdLineArgs::option(const char *option, const char *info,
   if (pstr == 0) throw string{"invalid data for string option"};
 
   CmdLineOption cmdlo;
-  _set_option_id(cmdlo, option_id);
+  const int oid = _set_option_id(cmdlo, option_id);
   _check_option(option, cmdlo.option_id);
   cmdlo.type = CMDL_STDSTR;
   cmdlo.option = option;
   cmdlo.info = info;
   cmdlo.group = _curGroup;
   cmdlo.p_str = pstr;
-
-  add(cmdlo);
-
-  return cmdlo.option_id;
+  emplace_back(std::move(cmdlo));
+  return oid;
 }
 
 int CmdLineArgs::option(const char *option, const char *info,
@@ -338,8 +323,7 @@ int CmdLineArgs::option(const char *option, const char *info,
   if (pi == 0) throw string{"invalid data for value selection (CMDL_VALUE_SEL)"};
 
   CmdLineOption cmdlo;
-
-  _set_option_id(cmdlo, option_id);
+  const int oid = _set_option_id(cmdlo, option_id);
   _check_option(option, cmdlo.option_id);
   cmdlo.type = CMDL_VALUE_SEL;
   cmdlo.option = option;
@@ -347,10 +331,8 @@ int CmdLineArgs::option(const char *option, const char *info,
   cmdlo.group = _curGroup;
   cmdlo.p_int = pi;
   cmdlo.value = value;
-
-  add(cmdlo);
-
-  return cmdlo.option_id;
+  emplace_back(std::move(cmdlo));
+  return oid;
 }
 
 int CmdLineArgs::option(const char *option, const char *info,
@@ -360,8 +342,7 @@ int CmdLineArgs::option(const char *option, const char *info,
                            "(CMDL_USER_WITH_ARG)"};
 
   CmdLineOption cmdlo;
-
-  _set_option_id(cmdlo, option_id);
+  const int oid = _set_option_id(cmdlo, option_id);
   _check_option(option, cmdlo.option_id);
   cmdlo.type = CMDL_USER_WITH_ARG;
   cmdlo.option = option;
@@ -369,10 +350,8 @@ int CmdLineArgs::option(const char *option, const char *info,
   cmdlo.group = _curGroup;
   cmdlo.param = param;
   cmdlo.option_handler = f;
-
-  add(cmdlo);
-
-  return cmdlo.option_id;
+  emplace_back(std::move(cmdlo));
+  return oid;
 }
 
 int CmdLineArgs::option(const char *option, const char *info,
@@ -382,8 +361,7 @@ int CmdLineArgs::option(const char *option, const char *info,
                            "(CMDL_USER_LAMBDA_WITH_ARG)"};
 
   CmdLineOption cmdlo;
-
-  _set_option_id(cmdlo, option_id);
+  const int oid = _set_option_id(cmdlo, option_id);
   _check_option(option, cmdlo.option_id);
   cmdlo.type = CMDL_USER_LAMBDA_WITH_ARG;
   cmdlo.option = option;
@@ -391,10 +369,8 @@ int CmdLineArgs::option(const char *option, const char *info,
   cmdlo.group = _curGroup;
   cmdlo.param = 0;
   cmdlo.option_lambda = f;
-
-  add(cmdlo);
-
-  return cmdlo.option_id;
+  emplace_back(std::move(cmdlo));
+  return oid;
 }
 
 int CmdLineArgs::alias(const char *option, int option_id, int alias_id) {
@@ -409,7 +385,7 @@ int CmdLineArgs::alias(const char *option, int option_id, int alias_id) {
     throw string{"option aliases cannot be aliased"};
 
   CmdLineOption cmdlo;
-  _set_option_id(cmdlo, option_id);
+  const int oid = _set_option_id(cmdlo, option_id);
   f_check_option_key(option, cmdlo.option_id);
   cmdlo.type    = CMDL_ALIAS;
   cmdlo.option  = option;
@@ -424,7 +400,7 @@ int CmdLineArgs::alias(const char *option, int option_id, int alias_id) {
 
   insert(it, cmdlo);
 
-  return cmdlo.option_id;
+  return oid;
 }
 
 void CmdLineArgs::doc_header(const char *doc) {
@@ -438,7 +414,7 @@ void CmdLineArgs::doc_header(const char *doc) {
   cmdlo.info = doc;
   cmdlo.group = _curGroup;
   cmdlo.p_int = 0;
-  add(cmdlo);
+  emplace_back(std::move(cmdlo));
 }
 
 bool CmdLineArgs::option_uses_no_arg(int id) /*id = -1: most recent*/ {
@@ -505,7 +481,7 @@ int CmdLineArgs::parse_cmd_line(unsigned flags) {
   // Build parser data structure
   argp parser_data;
   parser_data.options     = _argpOptions.data();
-  parser_data.parser      = f_options_parser;
+  parser_data.parser      = _options_parser;
   parser_data.doc         = _doc.empty() ? 0 : _doc.c_str();
   parser_data.args_doc    = _args_doc.empty() ? 0 : _args_doc.c_str();
   parser_data.children    = 0;
@@ -515,7 +491,7 @@ int CmdLineArgs::parse_cmd_line(unsigned flags) {
   // Build data structure to communicate CmdLineArgs data to the parser
   CmdLineArgsData cml_data;
   cml_data.self = this;
-  cml_data.argp_handler = _argpHandler;
+  // cml_data.argp_handler = &_argpHandler;
 
   // Parse arguments
   return argp_parse(&parser_data, _argc, _argv, flags, &indexStopped,
@@ -621,6 +597,12 @@ int CmdLineArgs::options_parser(int key, char *arg) {
 void CmdLineArgs::set_doc(const std::string& s) {_doc = s;}
 void CmdLineArgs::set_args_doc(const std::string& s) {_args_doc = s;}
 
+void CmdLineArgs::set_footer(const std::string& s) {
+  if (_doc.find('\v') != string::npos)
+    throw string{"a help footer has already been defined"};
+  _doc += "\v" + s;
+}
+
 void CmdLineArgs::display_usage(unsigned flags) const {
   if (!_parsed)
     throw string{"CmdLineArgs::display_help and _usage() can only "
@@ -628,7 +610,7 @@ void CmdLineArgs::display_usage(unsigned flags) const {
   // Build parser data structure
   argp parser_data;
   parser_data.options     = _argpOptions.data();
-  parser_data.parser      = f_options_parser;
+  parser_data.parser      = _options_parser;
   parser_data.doc         = _doc.empty() ? _doc.c_str() : 0;
   parser_data.args_doc    = _args_doc.empty() ? 0 : _args_doc.c_str();
   parser_data.children    = 0;

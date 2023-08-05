@@ -46,8 +46,7 @@
 const char *argp_program_version = "t2-argp 1.0";
 const char *argp_program_bug_address = "<bug-gnu-utils@gnu.org>";
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
   /* Our argument parser.  The options, parser, and
      args_doc fields are zero because we have neither options or
      arguments; doc and argp_program_bug_address will be

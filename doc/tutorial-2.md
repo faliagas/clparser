@@ -1,8 +1,8 @@
 [ [Prev <](tutorial-1.html "Basic types") ] [ [Next >](tutorial-3.html "Mutually Exclusive Options - Aliases") ] [ [Up](tutorial.html "Table of Contents") ]
 
-### Lesson 2: Displaying Reports and Executing Commands
+### Lesson 2: Displaying Reports And Executing Commands
 
-If the command line specification of basic data types is enough for your application (as it is for example the case with programs intended for scientific calculations), you can stop this tutorial after section 2.1, or proceed to Part II. In this second lesson of the tutorial you will learn how to
+If the command line specification of basic data types is enough for your application (as it is for example the case with programs intended for scientific calculations), you can stop this tutorial after Section 2.1 or proceed to Part II. In this second lesson of the tutorial you will learn how to
 
 - automatically display a report of command line specifications
 
@@ -12,7 +12,8 @@ If the command line specification of basic data types is enough for your applica
 
 
 #### 2.1 Displaying reports
-We have seen that, after processing the program's arguments, some kind of communication of the program's parameters to the user is often necessary. **Clparser** offers an automated method to do this.
+
+As we have seen, communication of the program's parameters to the user is often necessary after processing the program's arguments. **Clparser** offers an automated method to do this.
 
 Carrying on with example-16, we replace the `cout << ...` statement, which we used to display a report of the user's specification, with the **CmdLineArgs**-provided method **display_specs()** (`example-21.cpp`):
 
@@ -22,7 +23,7 @@ cl.display_specs();
 ```
 
 Place these two statements below the `cl.display_messages()` statement.
-If we run the compiled program with the arguments `-name="John Doe" -salary=35000`, we obtain the following output:
+Run the compiled program with the arguments `-name="John Doe" -salary=35000` to get the following output:
 
 ```bash
 $ Command line specifications:
@@ -33,46 +34,41 @@ $ employee age: 0
 $ marital status: false
 ```
 
-The standard **CmdLineArgs** method **display_specs()** prints the user's specifications using the information we provided as a second argument to each `option` method call, or, if this was null, the option's name (first argument of `option`). Parameters with default values, i.e. those not changed by the user, come under the title _Default values_.
+The standard **CmdLineArgs** method **display_specs()** prints the user's specifications using the information provided by the second argument to the `option` method calls or, if null, the option's name (first argument of `option`). Parameters with default values, i.e., those not changed by the user, come under _Default values_.
 
 #### 2.2 Executing commands
-Let us assume we would like to have our program display its version upon user's request. This can be easily handled by defining a boolean and inserting an `if` statement to check the user's specification. **Clparser** provides a more powerful method, which is simpler and reduces coding effort: _command line argument handlers_.
 
-Our next program, example-22, just displays its version, when the user requests it.
+Let us assume we would like to have our program display its version upon the user's request. We could easily handle it by defining a boolean and inserting an `if` statement to check the user's specification. **Clparser** provides a more elegant method requiring less coding effort: _command line argument handlers_. Let's see it in action with the following example (example-22):
 
 ```c++
 string ver = "1.2.3";
-try
-{
+try {
   CmdLineArgs cl(argc, argv);
   cl.option("--version", "Display program version", show_ver, &ver);
   cl.parse();
   cl.display_messages();
 }
-catch (string& error_msg)
-{
+catch (const string& error_msg) {
   cout << "error: " << error_msg << endl;
   return 1;
 }
 ```
 
-The code for the `show_ver` function is given in the next code snippet:
+Here is the code for the `show_ver` function:
 
 ```c++
-bool show_ver(CmdLineArgs *self, void *p)
-{
-   string *pstr = static_cast<string *>(p);
-   cout << "Program " << self->program_name() << " version: " << *pstr << endl;
-   return false;
+bool show_ver(CmdLineArgs* self, void* p) {
+  string *pstr = static_cast<string *>(p);
+  cout << "Program " << self->program_name() << " version: " << *pstr << endl;
+  return false;
 }
 ```
 
-Alternatively, one might use _lambdas_ to produce a more elegant and compact code (example-22a):
+Alternatively, one might use _lambdas_ for a more elegant and compact code (example-22a):
 
 ```c++
 string ver = "1.2.3";
-try
-{
+try {
   CmdLineArgs cl(argc, argv);
   cl.option("--version", "Display program version",
     [ver, &cl](const char*) {
@@ -82,14 +78,13 @@ try
   cl.parse();
   cl.display_messages();
 }
-catch (string& error_msg)
-{
+catch (const string& error_msg) {
   cout << "error: " << error_msg << endl;
   return 1;
 }
 ```
 
-The `return false` statement signals that program execution must be terminated after the lambda (or handler) has returned. If the lambda (or function) returns `true` the program continues running uninterruptedly.
+The `return false` statement signals that the program must be terminated after the lambda has returned. If the lambda (or function) returns `true` the program continues running uninterruptedly.
 
 The output, when the program is given the argument `--version`, is
 
@@ -102,8 +97,7 @@ The next example (example-22b.cpp) shows how to add support for command line hel
 ```c++
 string ver = "1.2.3";
 int num = 0;
-try
-{
+try {
   CmdLineArgs cl(argc, argv);
   cl.set_doc("example-22b -- my first program using help.");
   cl.option("--help", "Display help", [&cl](const char*) {
@@ -120,8 +114,7 @@ try
   cout << "Command line specification:" << endl;
   cl.display_specs();
 }
-catch (string& error_msg)
-{
+catch (const string& error_msg) {
   cout << "error: " << error_msg << endl;
   return 1;
 }
@@ -141,12 +134,11 @@ $ --version           Display program version
 $ --num=VALUE         Number of objects
 ```
 
-The next less trivial example (example-22c.cpp) collects employee data (see example-16) from the command line and adds them into a database! Employee records are '`;`'-separated and employee data are '`,`'-separated.
+The next less trivial example (example-22c.cpp) collects employee data (see example-16) from the command line and adds them into a database. Employee records are '`;`'-separated and employee data are '`,`'-separated.
 
 ```c++
 vector<Employee> db;
-try
-{
+try {
   CmdLineArgs cl(argc, argv);
   cl.set_doc("example-22c -- add employee records to database.\n"
              "Employee records are supplied as name,age,salary,married"
@@ -159,8 +151,7 @@ try
     [&db](const char *arg) {
       std::stringstream ss(arg);
       string record;
-      while (std::getline(ss, record, ';'))
-      {
+      while (std::getline(ss, record, ';')) {
         Employee employee = parse_employee(record);
         db.push_back(employee);
       }
@@ -171,19 +162,17 @@ try
   cout << "Command line specifications:" << endl;
   cl.display_specs();
 }
-catch (std::string& error_msg)
-{
+catch (const std::string& error_msg) {
   cout << "error: " << error_msg << endl;
   return 1;
 }
-catch (std::invalid_argument& a)
-{
+catch (std::invalid_argument& a) {
   cout << "error: " << "An invalid argument was supplied" << endl;
   return 1;
 }
 ```
 
-If we run the program with the argument `-employees="John Doe,45,3500.75,yes;;Jack Smith,52,32800,yes;Jim Last,62,40000,no"` we obtain:
+Run the program with the argument `-employees="John Doe,45,3500.75,yes;;Jack Smith,52,32800,yes;Jim Last,62,40000,no"` to get:
 
 ```bash
 $ Command line specifications:

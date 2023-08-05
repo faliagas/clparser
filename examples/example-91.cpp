@@ -6,14 +6,14 @@ using std::endl;
 using std::string;
 using std::vector;
 
-int main(int argc, char *argv[])
-{
-	int num = 1;
-	vector<string> sources;
-	try
-	{
+int main(int argc, char *argv[]) {
+  int num = 1;
+  vector<string> sources;
+  try {
     CmdLineArgs cl(argc, argv);
-    cl.set_doc("Clparser argp example 9.1 -- Help footers.\v"
+    cl.set_doc("Clparser argp example 9.1 -- Help footers.");
+    cl.set_args_doc("ARG1 ...");
+    cl.set_footer(
                "Footer text:\n"
                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed "
                "do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
@@ -28,24 +28,21 @@ int main(int argc, char *argv[])
                "accommodare an eam. Reque blandit qui eu, cu vix nonumy "
                "volumus. Legendos intellegam id usu, vide oporteat vix eu, "
                "id illud principes has. Nam tempor utamur gubergren no.");
-    cl.set_args_doc("ARG1 ...");
     cl.option("num", "number of objects", &num, 'n');
     cl.parse();
-    if (cl.sources().size() < 1)
-    {
+    if (cl.sources().size() < 1) {
       cl.display_usage();
       return 3;
     }
     sources = cl.sources();
   }
-  catch (string& error_msg)
-  {
+  catch (const string& error_msg) {
     cout << "error: " << error_msg << endl;
     return 1;
   }
-	cout << "num = " << num << endl;
-	cout << "sources:" << endl;
-	for (auto source: sources)
+  cout << "num = " << num << endl;
+  cout << "sources:" << endl;
+  for (auto source: sources)
     cout << source << " ";
   cout << endl;
   return 0;

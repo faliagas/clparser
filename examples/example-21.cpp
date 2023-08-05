@@ -4,20 +4,17 @@
 using std::cout;
 using std::endl;
 
-struct Employee
-{
+struct Employee {
   std::string name;
   int         age;
   double      salary;
   bool        married;
 };
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   Employee employee = {"noname", 0, 0., false};
 
-  try
-  {
+  try {
     CmdLineArgs cl(argc, argv);
     cl.option("-name=", "employee name", &employee.name);
     cl.option("-age=", "employee age", &employee.age);
@@ -28,14 +25,12 @@ int main(int argc, char *argv[])
     cout << "Command line specifications:" << endl;
     cl.display_specs();
   }
-  catch (std::string& error_msg)
-  {
+  catch (std::string& error_msg) {
     cout << "error: " << error_msg << endl;
     return 1;
   }
 
-  while (true)
-  {
+  while (true) {
     char ch;
     cout << "Continue (y/n) ? "; std::cin >> ch;
     if (ch == 'y' || ch == 'Y') break;
