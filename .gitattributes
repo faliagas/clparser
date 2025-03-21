@@ -1,0 +1,5 @@
+# Set the language for C++ files
+*.cpp linguist-language=C++
+*.hpp linguist-language=C++
+*.h linguist-language=C++
+*.cxx linguist-language=C++
